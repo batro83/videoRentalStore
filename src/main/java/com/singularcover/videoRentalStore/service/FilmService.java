@@ -22,10 +22,15 @@ public class FilmService {
 	}
 	
 	
-	public List<Film> getMoviesByType(String idType) {
+	public List<Film> getMoviesByType(Long type) {
 		List<Film> films = new ArrayList<>();
-		filmRepository.findByTypeIdTypeFilm(idType).forEach(film -> films.add(film));
+		filmRepository.findByTypeIdTypeFilm(type).forEach(film -> films.add(film));
         return films;
+	}
+	
+	
+	public void deleteFilm(Long id) {
+		filmRepository.deleteById(id);
 	}
 
 }

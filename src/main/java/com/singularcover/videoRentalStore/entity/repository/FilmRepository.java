@@ -10,6 +10,6 @@ import com.singularcover.videoRentalStore.entity.Film;
 @Repository
 public interface FilmRepository extends CrudRepository<Film, Long>{
 
-	public List<Film> findByTypeIdTypeFilm(String idType);
+	public List<Film> findByTypeIdTypeFilm(Long idType);
 
 }
