@@ -27,10 +27,13 @@ public class FilmService {
 		filmRepository.findByTypeIdTypeFilm(type).forEach(film -> films.add(film));
         return films;
 	}
-	
-	
+		
 	public void deleteFilm(Long id) {
 		filmRepository.deleteById(id);
+	}
+	
+	public void saveOrUpdateFilm(Film film) {
+		filmRepository.save(film);
 	}
 
 }

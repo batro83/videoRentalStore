@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +41,7 @@ public class InventoryController {
     }
 	
 	
-	@ApiOperation(value = "Get inventory by type", notes = "Movies by type")
+	@ApiOperation(value = "Get inventory by type id", notes = "Movies by type id")
 	@GetMapping(path = "/inventory/{type}")
     public ResponseEntity<List<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
 		LOG.debug("StoreController - findMoviesByType");
@@ -55,7 +57,13 @@ public class InventoryController {
     }
 
 	
-	
+	@ApiOperation(value = "Add movie", notes = "Add movie in inventory")
+	@PostMapping(path = "/inventory")
+    public ResponseEntity<HttpStatus> addFilm(@RequestBody(required = true) Film film) {
+		LOG.debug("StoreController - addFilm");
+		filmService.saveOrUpdateFilm(film);
+		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
+    }
 
 
 }
