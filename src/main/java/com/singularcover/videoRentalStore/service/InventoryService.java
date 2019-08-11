@@ -11,34 +11,32 @@ import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 
 @Service
 public class InventoryService {
-	
+
 	@Autowired
 	FilmRepository filmRepository;
-	
+
 	public List<Film> getAllMovies() {
 		List<Film> films = new ArrayList<>();
 		filmRepository.findAll().forEach(film -> films.add(film));
-        return films;
+		return films;
 	}
-	
-	
+
 	public List<Film> getMoviesByType(Long type) {
 		List<Film> films = new ArrayList<>();
 		filmRepository.findByTypeIdTypeFilm(type).forEach(film -> films.add(film));
-        return films;
+		return films;
 	}
-	
-	
+
 	public List<Film> getMoviesByIdList(List<Long> idList) {
 		List<Film> films = new ArrayList<>();
 		filmRepository.findAllById(idList).forEach(film -> films.add(film));
-        return films;
+		return films;
 	}
-		
+
 	public void deleteFilm(Long id) {
 		filmRepository.deleteById(id);
 	}
-	
+
 	public void saveOrUpdateFilm(Film film) {
 		filmRepository.save(film);
 	}

@@ -20,50 +20,45 @@ import com.singularcover.videoRentalStore.service.InventoryService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @RestController
 @RequestMapping("/api")
 public class InventoryController {
-		
+
 	private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
-	
+
 	@Autowired
 	private InventoryService inventoryService;
-	
-	//TODO: put paths into an other class
-	
-	
+
+	// TODO: put paths into an other class
+
 	@ApiOperation(value = "Get inventory", notes = "All movies")
 	@GetMapping(path = "/inventory")
-    public ResponseEntity<List<Film>> findAllMovies() {	
+	public ResponseEntity<List<Film>> findAllMovies() {
 		LOG.debug("StoreController - findAllMovies");
-        return ResponseEntity.ok(inventoryService.getAllMovies());
-    }
-	
-	
+		return ResponseEntity.ok(inventoryService.getAllMovies());
+	}
+
 	@ApiOperation(value = "Get inventory by type id", notes = "Movies by type id")
 	@GetMapping(path = "/inventory/{type}")
-    public ResponseEntity<List<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
+	public ResponseEntity<List<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
 		LOG.debug("StoreController - findMoviesByType");
 		return ResponseEntity.ok(inventoryService.getMoviesByType(type));
-    }
-	
+	}
+
 	@ApiOperation(value = "Remove movie by id", notes = "Remove movie by id from inventory")
 	@DeleteMapping(path = "/inventory/{idFilm}")
-    public ResponseEntity<HttpStatus> removeFilm(@PathVariable(value = "idFilm", required = true) Long idFilm) {
+	public ResponseEntity<HttpStatus> removeFilm(@PathVariable(value = "idFilm", required = true) Long idFilm) {
 		LOG.debug("StoreController - removeFilm");
 		inventoryService.deleteFilm(idFilm);
 		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
-    }
+	}
 
-	
 	@ApiOperation(value = "Add movie", notes = "Add movie in inventory")
 	@PostMapping(path = "/inventory")
-    public ResponseEntity<HttpStatus> addFilm(@RequestBody(required = true) Film film) {
+	public ResponseEntity<HttpStatus> addFilm(@RequestBody(required = true) Film film) {
 		LOG.debug("StoreController - addFilm");
 		inventoryService.saveOrUpdateFilm(film);
 		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
-    }
-
+	}
 
 }

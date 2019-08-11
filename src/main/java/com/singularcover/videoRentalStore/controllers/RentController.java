@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.singularcover.videoRentalStore.dto.RentalDTO;
+import com.singularcover.videoRentalStore.entity.Customer;
+import com.singularcover.videoRentalStore.service.CustomerService;
 import com.singularcover.videoRentalStore.service.RentService;
 
 import io.swagger.annotations.ApiOperation;
@@ -26,15 +28,21 @@ public class RentController {
 	@Autowired
 	private RentService rentService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 
 	@ApiOperation(value = "Renting films", notes = "Renting one or several films and calculating the price")
 	@PostMapping(path = "/{customer}/rent/{films}")
 	public ResponseEntity<RentalDTO> rentFilms(
-			@PathVariable("customer") Integer command,
+			@PathVariable("customer") Integer customer,
 			@PathVariable("films") List<Long> films) {
 		
 		LOG.debug("RentController - rentFilms");
-		return ResponseEntity.ok(rentService.rentFilms(films));
+		
+		Customer cust = customerService.findCustomerById(customer);
+		
+		return ResponseEntity.ok(rentService.rentFilms(films, cust));
 	}
 
 }
