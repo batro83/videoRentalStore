@@ -11,6 +11,8 @@ public class TypeFilm {
 	@Id
 	private Long idTypeFilm;	
 	private String description;
+	private Integer points;
+	private Integer price;
 		
 	
 	public String getDescription() {
@@ -24,6 +26,18 @@ public class TypeFilm {
 	}
 	public void setIdTypeFilm(Long idTypeFilm) {
 		this.idTypeFilm = idTypeFilm;
+	}
+	public Integer getPoints() {
+		return points;
+	}
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 }

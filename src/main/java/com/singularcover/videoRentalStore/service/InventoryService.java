@@ -10,7 +10,7 @@ import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 
 @Service
-public class FilmService {
+public class InventoryService {
 	
 	@Autowired
 	FilmRepository filmRepository;
@@ -25,6 +25,13 @@ public class FilmService {
 	public List<Film> getMoviesByType(Long type) {
 		List<Film> films = new ArrayList<>();
 		filmRepository.findByTypeIdTypeFilm(type).forEach(film -> films.add(film));
+        return films;
+	}
+	
+	
+	public List<Film> getMoviesByIdList(List<Long> idList) {
+		List<Film> films = new ArrayList<>();
+		filmRepository.findAllById(idList).forEach(film -> films.add(film));
         return films;
 	}
 		

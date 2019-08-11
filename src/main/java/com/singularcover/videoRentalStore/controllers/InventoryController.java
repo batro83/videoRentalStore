@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.singularcover.videoRentalStore.entity.Film;
-import com.singularcover.videoRentalStore.service.FilmService;
+import com.singularcover.videoRentalStore.service.InventoryService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -28,7 +28,7 @@ public class InventoryController {
 	private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
 	
 	@Autowired
-	private FilmService filmService;
+	private InventoryService inventoryService;
 	
 	//TODO: put paths into an other class
 	
@@ -37,7 +37,7 @@ public class InventoryController {
 	@GetMapping(path = "/inventory")
     public ResponseEntity<List<Film>> findAllMovies() {	
 		LOG.debug("StoreController - findAllMovies");
-        return ResponseEntity.ok(filmService.getAllMovies());
+        return ResponseEntity.ok(inventoryService.getAllMovies());
     }
 	
 	
@@ -45,14 +45,14 @@ public class InventoryController {
 	@GetMapping(path = "/inventory/{type}")
     public ResponseEntity<List<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
 		LOG.debug("StoreController - findMoviesByType");
-		return ResponseEntity.ok(filmService.getMoviesByType(type));
+		return ResponseEntity.ok(inventoryService.getMoviesByType(type));
     }
 	
 	@ApiOperation(value = "Remove movie by id", notes = "Remove movie by id from inventory")
 	@DeleteMapping(path = "/inventory/{idFilm}")
     public ResponseEntity<HttpStatus> removeFilm(@PathVariable(value = "idFilm", required = true) Long idFilm) {
 		LOG.debug("StoreController - removeFilm");
-		filmService.deleteFilm(idFilm);
+		inventoryService.deleteFilm(idFilm);
 		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
 
@@ -61,7 +61,7 @@ public class InventoryController {
 	@PostMapping(path = "/inventory")
     public ResponseEntity<HttpStatus> addFilm(@RequestBody(required = true) Film film) {
 		LOG.debug("StoreController - addFilm");
-		filmService.saveOrUpdateFilm(film);
+		inventoryService.saveOrUpdateFilm(film);
 		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
 

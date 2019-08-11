@@ -5,21 +5,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
-public class User {
+@Table(name="CUSTOMER")
+public class Customer {
 	
 	
 	@Id
-	private Long idUser;	
+	private Long idCustomer;	
 	private String name;
 	private Integer points;
 	
 	
-	public Long getIdUser() {
-		return idUser;
+	public Long getIdCustomer() {
+		return idCustomer;
 	}
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setIdCustomer(Long idCustomer) {
+		this.idCustomer = idCustomer;
 	}
 	public String getName() {
 		return name;
