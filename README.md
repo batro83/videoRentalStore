@@ -2,7 +2,7 @@
 
 
 Asumption:  
-´´´
+```
 - Asume this api is called from any kind of gateway or frontend, and I use film ids and not film name. Then I supposed that I receive these ids. Ids exists, well formed, etc   
 
 - Ilimited films. 
@@ -16,7 +16,7 @@ Asumption:
 - For basic price surcharges: every day extra * 1€  
 
 - For premium price surcharges: every day extra * 3€   
-´´´
+```
 
 **Feel free to modify data.sql to initialize the db as you want.
  
