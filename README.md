@@ -5,9 +5,10 @@ Asume this api is called from any kind of gateway or frontend, and I use film id
 Ilimited films. 
 
 Premium price for new releases.
-Basic price form regular and old films.
+Basic price for regular and old films.
 
-
+Surcharges:  
+	- 
 
 **Feel free to modify data.sql to initialize the db as you want.
  
@@ -19,36 +20,36 @@ Mockito
 DB: H2 in memory  
 
 
-##Swagger url
+## Swagger url
 
 http://localhost:8081/swagger-ui.html  
 
 
-##DB url  
+## DB url  
   
 http://localhost:8081/h2-console  
 user:sa
 password:
 In the browser, change the JDBC URL to: jdbc:h2:mem:testdb 
 
-##Run  
+## Run  
 
 
-##TODO
+## TODO
 
 
-##TABLE
+## TABLE
 
-###FILM  
+### FILM  
 
-###TYPE_FILM  
+### TYPE_FILM  
 
-###USER
+### USER
 
-###RENT    
+### RENT    
 
 
-##Examples
+## Examples
 
 You can use this user ids:  
 user1 = 1  
@@ -57,7 +58,7 @@ user3 = 2
 Films ids:  
 
 
-##Improving
+## Improving
 For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
 
 
