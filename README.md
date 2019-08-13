@@ -1,9 +1,21 @@
 # videoRentalStore
 
+Asume this api is called from any kind of gateway or frontend, and I use film ids and not film name. Then I supposed that I receive these ids.
 
+Ilimited films. 
+
+Premium price for new releases.
+Basic price form regular and old films.
+
+
+
+**Feel free to modify data.sql to initialize the db as you want.
+ 
 ## Tech stack  
 Springboot  
-Mockito  
+Hibernate	
+JPA	
+Mockito	  
 DB: H2 in memory  
 
 
@@ -19,6 +31,10 @@ user:sa
 password:
 In the browser, change the JDBC URL to: jdbc:h2:mem:testdb 
 
+##Run  
+
+
+##TODO
 
 
 ##TABLE
@@ -27,8 +43,22 @@ In the browser, change the JDBC URL to: jdbc:h2:mem:testdb
 
 ###TYPE_FILM  
 
-###USER  
+###USER
 
+###RENT    
+
+
+##Examples
+
+You can use this user ids:  
+user1 = 1  
+user3 = 2  
+
+Films ids:  
+
+
+##Improving
+For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
 
 
 

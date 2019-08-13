@@ -4,35 +4,42 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "RENT")
 public class Rent {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idRent;
 
 	@ManyToOne
 	@JoinColumn(name = "idCustomer")
-	private Customer idCustomer;
+	private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name = "idFilm")
-	private Film idFilm;
+	private Film film;
 
 	private Date dateRent;
 	private Date dateReturn;
 	private Integer points;
+	private Integer days;
+	
+	public Rent() {	}
 
-	public Rent(Customer idCustomer, Film idFilm, Date dateRent, Integer points) {
+	public Rent(Customer customer, Film film, Date dateRent, Integer points, Integer days) {
 		super();
-		this.idCustomer = idCustomer;
-		this.idFilm = idFilm;
+		this.customer = customer;
+		this.film = film;
 		this.dateRent = dateRent;
 		this.points = points;
+		this.setDays(days);
 	}
 
 	public Integer getIdRent() {
@@ -43,20 +50,20 @@ public class Rent {
 		this.idRent = idRent;
 	}
 
-	public Customer getIdCustomer() {
-		return idCustomer;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setIdCustomer(Customer idCustomer) {
-		this.idCustomer = idCustomer;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Film getIdFilm() {
-		return idFilm;
+	public Film getFilm() {
+		return film;
 	}
 
-	public void setIdFilm(Film idFilm) {
-		this.idFilm = idFilm;
+	public void setFilm(Film film) {
+		this.film = film;
 	}
 
 	public Date getDateRent() {
@@ -81,6 +88,14 @@ public class Rent {
 
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+
+	public Integer getDays() {
+		return days;
+	}
+
+	public void setDays(Integer days) {
+		this.days = days;
 	}
 
 }

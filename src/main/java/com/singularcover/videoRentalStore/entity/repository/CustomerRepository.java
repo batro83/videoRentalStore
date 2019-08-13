@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.singularcover.videoRentalStore.entity.Customer;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 }

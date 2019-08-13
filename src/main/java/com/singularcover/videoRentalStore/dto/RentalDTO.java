@@ -4,9 +4,7 @@ public class RentalDTO {
 	
 	
 	private Integer price;
-	private Integer points;
-	private Integer totalPoints;
-	
+	private Integer points;	
 	
 	
 	public Integer getPrice() {
@@ -21,15 +19,9 @@ public class RentalDTO {
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
-	public Integer getTotalPoints() {
-		return totalPoints;
-	}
-	public void setTotalPoints(Integer totalPoints) {
-		this.totalPoints = totalPoints;
-	}
 	@Override
 	public String toString() {
-		return "RentalDTO [price=" + price + ", points=" + points + ", totalPoints=" + totalPoints + "]";
+		return "RentalDTO [price=" + price + ", points=" + points + "]";
 	}
 
 }

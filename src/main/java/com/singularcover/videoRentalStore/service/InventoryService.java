@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 
+/**
+ * Business logic for inventorys store
+ * @author roger
+ *
+ */
 @Service
 public class InventoryService {
 

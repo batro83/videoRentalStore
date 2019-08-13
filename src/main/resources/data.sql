@@ -23,7 +23,6 @@ CREATE TABLE Type_Film (
   price INT NOT NULL
 );
 
-
 INSERT INTO Type_Film (id_Type_Film, description, points, price) VALUES
   (1, 'New releases', 2, 3),
   (2, 'Regular films', 1, 1),
@@ -38,14 +37,20 @@ CREATE TABLE film (
   name VARCHAR(250) NOT NULL,
   category VARCHAR(250) NOT NULL,
   date_Created DATE NOT NULL,
-  id_Type_Film INT
+  id_Type_Film INT,
+  FOREIGN KEY (id_Type_Film) REFERENCES Type_Film(id_Type_Film),
 );
  
 INSERT INTO film (name, category, date_Created, id_Type_Film) VALUES
   ('Aliko', 'Terror', sysdate, 1),
-  ('Bill', 'Terror', sysdate, 2),
-  ('Folrunsho', 'Terror', sysdate, 3);
-  
+  ('Bill', 'Comedy', sysdate, 2),
+  ('Folrunsho', 'Terror', sysdate, 3),
+  ('FilmC', 'Comedy', sysdate, 1),
+  ('FilmD', 'Comedy', sysdate, 2),
+  ('FilmE', 'Thriller', sysdate, 3),
+  ('FilmF', 'Comedy', sysdate, 1),
+  ('FilmG', 'Terror', sysdate, 1),
+  ('FilmH', 'Thriller', sysdate, 3);  
   
   
 -- Table Rent 
@@ -55,11 +60,16 @@ CREATE TABLE rent (
   id_Rent INT AUTO_INCREMENT  PRIMARY KEY,
   id_Customer INT NOT NULL,
   id_Film INT NOT NULL,
+  days INT NOT NULL,
   date_rent DATE NOT NULL,
   date_return DATE,
-  points INT NOT NULL
+  points INT NOT NULL,
+  FOREIGN KEY (id_Customer) REFERENCES Customer(id_Customer),
+  FOREIGN KEY (id_Film) REFERENCES Film(id_Film)
 );
  
-INSERT INTO rent (id_Customer, id_Film, date_rent, points) VALUES
-  (1, 1, sysdate, 1),
-  (1, 2, sysdate, 2);
+/*
+INSERT INTO rent (id_Customer, id_Film, date_rent, points, days) VALUES
+  (1, 1, sysdate, 1, 2),
+  (1, 2, sysdate, 2, 3);
+ */
