@@ -1,5 +1,7 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,28 +27,39 @@ public class InventoryServiceTest {
 	
 	@Test
 	public void deleteFilmTest_OK() {
-		Film dummyFilm = new Film();
-		dummyFilm.setIdFilm(1L);
-		
+		Film dummyFilm = Film.builder()
+				.setIdFilm(1L)
+				.build();
+
 		// Act
 		inventoryService.deleteFilm(1L);
-        // Assert
-        Mockito.verify(filmRepository,  Mockito.times(1)).deleteById(dummyFilm.getIdFilm());
-				
+		// Assert
+		Mockito.verify(filmRepository, Mockito.times(1)).deleteById(dummyFilm.getIdFilm());
+
 	}
-	
-	
+
 	@Test
 	public void saveOrUpdateFilm_OK() {
-		Film dummyFilm = new Film();
-		dummyFilm.setIdFilm(1L);
-		
+		Film dummyFilm = Film.builder()
+				.setIdFilm(1L)
+				.build();
+
 		Mockito.when(filmRepository.save(Mockito.any(Film.class))).thenReturn(dummyFilm);
-		
+
 		Film film = inventoryService.saveOrUpdateFilm(dummyFilm);
 		Assert.assertEquals(film.getIdFilm(), dummyFilm.getIdFilm());
-				
+
 	}
-	
+
+	@Test
+	public void getAllMovies_OK() {
+
+		Mockito.when(filmRepository.findAll()).thenReturn(Mockito.anyIterable());
+
+		List<Film> filmList = inventoryService.getAllMovies();
+		Assert.assertNotNull(filmList);
+		Assert.assertTrue(filmList.size() > 0);
+
+	}
 
 }

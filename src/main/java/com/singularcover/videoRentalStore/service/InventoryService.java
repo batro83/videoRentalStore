@@ -10,7 +10,7 @@ import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 
 /**
- * Business logic for inventorys store
+ * Business logic for inventories store
  * @author roger
  *
  */
