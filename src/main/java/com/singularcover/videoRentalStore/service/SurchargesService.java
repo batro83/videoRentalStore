@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.singularcover.videoRentalStore.entity.Rent;
-import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 /**
  * Surcharges business logic service
@@ -27,27 +26,6 @@ public class SurchargesService {
 
 
 	public int calculateSurcharges(Rent rent) {
-		int price = 0;
-		switch (rent.getFilm().getType().getIdTypeFilm().intValue()) {
-		case TypeFilmCts.NEW_RELEASES:
-			price = surcharges(rent);
-			break;
-		case TypeFilmCts.REGULAR_FILMS:
-			price = surcharges(rent);
-			break;
-		case TypeFilmCts.OLD_FILMS:
-			price = surcharges(rent);
-			break;
-			
-		default:
-			break;
-		}
-		
-		return price;
-	}
-		
-	
-	private int surcharges(Rent rent) {
 		int surcharge = 0;
 		long startTime = rent.getDateRent().getTime();
 		long endTime = Calendar.getInstance().getTimeInMillis();
@@ -61,6 +39,7 @@ public class SurchargesService {
 		
 		return surcharge;
 	}
-	
+		
+		
 
 }

@@ -42,8 +42,8 @@ public class InventoryService {
 		filmRepository.deleteById(id);
 	}
 
-	public void saveOrUpdateFilm(Film film) {
-		filmRepository.save(film);
+	public Film saveOrUpdateFilm(Film film) {
+		return filmRepository.save(film);
 	}
 
 }

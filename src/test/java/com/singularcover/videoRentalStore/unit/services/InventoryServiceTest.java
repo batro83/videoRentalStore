@@ -1,7 +1,5 @@
 package com.singularcover.videoRentalStore.unit.services;
 
-import java.util.Optional;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +9,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.singularcover.videoRentalStore.entity.Customer;
 import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 import com.singularcover.videoRentalStore.service.InventoryService;
@@ -30,14 +27,24 @@ public class InventoryServiceTest {
 	public void deleteFilmTest_OK() {
 		Film dummyFilm = new Film();
 		dummyFilm.setIdFilm(1L);
-		Mockito.doNothing().when(filmRepository).delete(dummyFilm);
-		
-		Mockito.mock(FilmRepository.class);
 		
 		// Act
 		inventoryService.deleteFilm(1L);
         // Assert
-        Mockito.verify(filmRepository,  Mockito.times(1)).delete(dummyFilm);
+        Mockito.verify(filmRepository,  Mockito.times(1)).deleteById(dummyFilm.getIdFilm());
+				
+	}
+	
+	
+	@Test
+	public void saveOrUpdateFilm_OK() {
+		Film dummyFilm = new Film();
+		dummyFilm.setIdFilm(1L);
+		
+		Mockito.when(filmRepository.save(Mockito.any(Film.class))).thenReturn(dummyFilm);
+		
+		Film film = inventoryService.saveOrUpdateFilm(dummyFilm);
+		Assert.assertEquals(film.getIdFilm(), dummyFilm.getIdFilm());
 				
 	}
 	
