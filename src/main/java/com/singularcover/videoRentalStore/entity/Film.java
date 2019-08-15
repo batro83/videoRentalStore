@@ -26,6 +26,16 @@ public class Film {
 	@ManyToOne
 	@JoinColumn(name = "idTypeFilm")
 	private TypeFilm type;
+	
+	
+	private Film(Long idFilm, String name, String category, Date dateCreated, TypeFilm type) {
+		super();
+		this.idFilm = idFilm;
+		this.name = name;
+		this.category = category;
+		this.dateCreated = dateCreated;
+		this.type = type;
+	}
 
 	public TypeFilm getType() {
 		return type;
@@ -66,5 +76,48 @@ public class Film {
 	public void setIdFilm(Long idFilm) {
 		this.idFilm = idFilm;
 	}
+	
+	public static FilmBuilder builder() {
+        return new FilmBuilder();
+    }
+	
+	public static class FilmBuilder {
+
+		private Long idFilm;
+		private String name;
+		private String category;
+		private Date dateCreated;
+		private TypeFilm type;
+
+        public Film build() {
+            return new Film(idFilm, name, category, dateCreated, type);
+        }
+
+		public FilmBuilder setIdFilm(Long idFilm) {
+			this.idFilm = idFilm;
+			return this;
+		}
+		
+		public FilmBuilder setName(String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public FilmBuilder setCategory(String category) {
+			this.category = category;
+			return this;
+		}
+		
+		public FilmBuilder setDateCreated(Date dateCreated) {
+			this.dateCreated = dateCreated;
+			return this;
+		}
+		
+		public FilmBuilder setType(TypeFilm type) {
+			this.type = type;
+			return this;
+		}
+
+    }
 
 }

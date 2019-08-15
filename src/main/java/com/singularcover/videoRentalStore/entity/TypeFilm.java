@@ -14,7 +14,13 @@ public class TypeFilm {
 	private Integer points;
 	private Integer price;
 		
-	
+	private TypeFilm(Long idTypeFilm, String description, Integer points, Integer price) {
+		super();
+		this.idTypeFilm = idTypeFilm;
+		this.description = description;
+		this.points = points;
+		this.price = price;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -39,5 +45,42 @@ public class TypeFilm {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	
+	public static TypeFilmBuilder builder() {
+        return new TypeFilmBuilder();
+    }
+	
+	public static class TypeFilmBuilder {
+
+		private Long idTypeFilm;	
+		private String description;
+		private Integer points;
+		private Integer price;
+
+        public TypeFilmBuilder setIdTypeFilm(final Long idTypeFilm) {
+            this.idTypeFilm = idTypeFilm;
+            return this;
+        }
+
+        public TypeFilmBuilder setDescription(final String description) {
+            this.description = description;
+            return this;
+        }
+
+        public TypeFilmBuilder setPoints(final Integer points) {
+            this.points = points;
+            return this;
+        }
+        
+        public TypeFilmBuilder setPrice(final Integer price) {
+            this.price = price;
+            return this;
+        }
+
+        public TypeFilm build() {
+            return new TypeFilm(idTypeFilm, description, points, price);
+        }
+
+    }
 
 }
