@@ -42,6 +42,15 @@ public class Rent {
 		this.points = points;
 		this.setDays(days);
 	}
+	
+	public Rent(Customer customer, Film film, Date dateRent, Integer points, Integer days) {
+		super();
+		this.customer = customer;
+		this.film = film;
+		this.dateRent = dateRent;
+		this.points = points;
+		this.setDays(days);
+	}
 
 	public Integer getIdRent() {
 		return idRent;

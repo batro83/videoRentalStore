@@ -1,5 +1,6 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -54,7 +55,7 @@ public class InventoryServiceTest {
 	@Test
 	public void getAllMovies_OK() {
 
-		Mockito.when(filmRepository.findAll()).thenReturn(Mockito.anyIterable());
+		Mockito.when(filmRepository.findAll()).thenReturn(Arrays.asList(Film.builder().build()));
 
 		List<Film> filmList = inventoryService.getAllMovies();
 		Assert.assertNotNull(filmList);

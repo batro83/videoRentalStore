@@ -14,7 +14,10 @@ public class Customer {
 	private String name;
 	private Integer points;
 	
-	
+		
+	public Customer() {
+		super();
+	}
 	public Long getIdCustomer() {
 		return idCustomer;
 	}

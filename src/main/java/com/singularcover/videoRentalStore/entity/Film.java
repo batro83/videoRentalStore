@@ -1,5 +1,6 @@
 package com.singularcover.videoRentalStore.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "FILM")
-public class Film {
+public class Film implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8846133880106206913L;
 
 	@Id
 	@GeneratedValue
@@ -26,8 +32,11 @@ public class Film {
 	@ManyToOne
 	@JoinColumn(name = "idTypeFilm")
 	private TypeFilm type;
-	
-	
+		
+	public Film() {
+		super();
+	}
+
 	private Film(Long idFilm, String name, String category, Date dateCreated, TypeFilm type) {
 		super();
 		this.idFilm = idFilm;

@@ -27,7 +27,7 @@ public class PriceRentalServiceTest {
 	
 	@Test
 	public void calculateRentalPriceNewReleases_OK() {
-		
+		final int daysForRent = 10;	
 		TypeFilm typeFilm = TypeFilm.builder().
 				setPrice(premium_price).
 				setIdTypeFilm(new Long(TypeFilmCts.NEW_RELEASES))
@@ -38,14 +38,14 @@ public class PriceRentalServiceTest {
 				.setIdFilm(1L)
 				.build();
 				
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, 10);		
+		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
 		Assert.assertEquals(30, price);
 
 	}
 	
 	@Test
 	public void calculateRentalPriceRegularFilms_OK() {
-		
+		final int daysForRent = 10;	
 		TypeFilm typeFilm = TypeFilm.builder().
 				setPrice(basic_price).
 				setIdTypeFilm(new Long(TypeFilmCts.REGULAR_FILMS))
@@ -56,13 +56,15 @@ public class PriceRentalServiceTest {
 				.setIdFilm(1L)
 				.build();
 			
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, 10);		
+		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
 		Assert.assertEquals(8, price);
 
 	}
 	
 	@Test
 	public void calculateRentalPriceOldFilms_OK() {
+		final int daysForRent = 10;	
+		
 		TypeFilm typeFilm = TypeFilm.builder().
 				setPrice(basic_price).
 				setIdTypeFilm(new Long(TypeFilmCts.OLD_FILMS))
@@ -73,7 +75,7 @@ public class PriceRentalServiceTest {
 				.setIdFilm(1L)
 				.build();
 		
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, 10);		
+		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
 		Assert.assertEquals(6, price);
 
 	}

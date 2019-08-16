@@ -14,6 +14,10 @@ public class TypeFilm {
 	private Integer points;
 	private Integer price;
 		
+		
+	public TypeFilm() {
+		super();
+	}
 	private TypeFilm(Long idTypeFilm, String description, Integer points, Integer price) {
 		super();
 		this.idTypeFilm = idTypeFilm;
