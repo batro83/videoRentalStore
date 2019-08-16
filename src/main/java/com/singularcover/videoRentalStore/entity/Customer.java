@@ -14,7 +14,12 @@ public class Customer {
 	private String name;
 	private Integer points;
 	
+	
 		
+	public Customer(Long idCustomer) {
+		super();
+		this.idCustomer = idCustomer;
+	}
 	public Customer() {
 		super();
 	}

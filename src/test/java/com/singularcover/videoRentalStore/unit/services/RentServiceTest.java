@@ -89,7 +89,7 @@ public class RentServiceTest {
 	@Test
 	public void returnFilmsTest_OK() {
 						
-		Mockito.when(rentRepository.findByFilmIdFilmIn(Mockito.anyList()))
+		Mockito.when(rentRepository.findRentedFilms(Mockito.anyList(), Mockito.anyLong()))
 			.thenReturn(Arrays.asList(Rent.builder().setIdRent(1).build()));
 		
 		Mockito.when(surchargesService.calculateSurcharges(Mockito.anyList()))
@@ -98,7 +98,7 @@ public class RentServiceTest {
 		Mockito.when(rentRepository.saveAll(Mockito.anyList()))
 			.thenReturn(Arrays.asList(Rent.builder().build()));
 		
-		RentalReturnDTO dto = rentService.returnFilms(Arrays.asList(1L,2L), new Customer());
+		RentalReturnDTO dto = rentService.returnFilms(Arrays.asList(1L,2L), new Customer(1L));
 		Assert.assertNotNull(dto);
 		Assert.assertNotNull(dto.getSurcharges());
 	}
