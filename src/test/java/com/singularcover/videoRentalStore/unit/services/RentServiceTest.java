@@ -87,10 +87,10 @@ public class RentServiceTest {
 	
 	
 	@Test
-	public void returnFilmsPointsTest_OK() {
+	public void returnFilmsTest_OK() {
 						
 		Mockito.when(rentRepository.findByFilmIdFilmIn(Mockito.anyList()))
-			.thenReturn(Arrays.asList(Rent.builder().build()));
+			.thenReturn(Arrays.asList(Rent.builder().setIdRent(1).build()));
 		
 		Mockito.when(surchargesService.calculateSurcharges(Mockito.anyList()))
 			.thenReturn(1);		

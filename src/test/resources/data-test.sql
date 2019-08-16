@@ -57,7 +57,7 @@ INSERT INTO film (name, category, date_Created, id_Type_Film) VALUES
 DROP TABLE IF EXISTS rent;
  
 CREATE TABLE rent (
-  id_Rent INT AUTO_INCREMENT  PRIMARY KEY,
+  id_Rent INT AUTO_INCREMENT PRIMARY KEY,
   id_Customer INT NOT NULL,
   id_Film INT NOT NULL,
   days INT NOT NULL,
@@ -70,5 +70,6 @@ CREATE TABLE rent (
  
 
 INSERT INTO rent (id_Customer, id_Film, date_rent, points, days) VALUES
-  (1, 8, sysdate-8, 2, 4),
-  (1, 2, sysdate-8, 1, 4);
+  (1, 4, sysdate-4, 1, 2),
+  (1, 3, sysdate-4, 2, 2);
+commit;

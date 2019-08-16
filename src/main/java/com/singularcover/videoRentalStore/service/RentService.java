@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.singularcover.videoRentalStore.dto.RentalDTO;
@@ -23,6 +24,7 @@ import com.singularcover.videoRentalStore.entity.repository.RentRepository;
  */
 @Service
 @Transactional
+@Sql({"/data.sql"})
 public class RentService {
 	
 	@Autowired
@@ -62,7 +64,7 @@ public class RentService {
 		RentalReturnDTO dto = new RentalReturnDTO();
 
 		// Get rents
-		List<Rent> rents = getRentByIdFilmList(idFilms);
+		List<Rent> rents = getRentByIdFilmList(idFilms, customer.getIdCustomer());
 
 		if (!rents.isEmpty()) {
 			
@@ -75,9 +77,9 @@ public class RentService {
 	}
 	
 	
-	private List<Rent> getRentByIdFilmList(List<Long> idList) {
+	private List<Rent> getRentByIdFilmList(List<Long> idList, Long idCustomer) {
 		List<Rent> rents = new ArrayList<>();
-		rentRepository.findByFilmIdFilmIn(idList).forEach(rent -> rents.add(rent));
+		rentRepository.findRentedFilms(idList, idCustomer).forEach(rent -> rents.add(rent));
 		return rents;
 	}
 	
