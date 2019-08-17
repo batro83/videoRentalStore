@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.singularcover.videoRentalStore.controllers.InventoryController;
 import com.singularcover.videoRentalStore.entity.Film;
-import com.singularcover.videoRentalStore.service.InventoryService;
+import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(InventoryController.class)
@@ -33,7 +33,7 @@ public class InventoryControllerTest {
 	private MockMvc mockMvc;
 	
 	@MockBean
-	private InventoryService inventoryService;
+	private InventoryServiceImpl inventoryService;
 	
 	@Autowired
 	private ObjectMapper mapper;

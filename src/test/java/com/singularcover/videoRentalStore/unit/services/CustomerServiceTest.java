@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.entity.Customer;
 import com.singularcover.videoRentalStore.entity.repository.CustomerRepository;
-import com.singularcover.videoRentalStore.service.CustomerService;
+import com.singularcover.videoRentalStore.service.impl.CustomerServiceImpl;
 
 
 @RunWith(SpringRunner.class)
@@ -25,7 +25,7 @@ public class CustomerServiceTest {
 	CustomerRepository customerRepository;
 	
 	@InjectMocks
-	CustomerService customerService;
+	CustomerServiceImpl customerService;
 	
 	@Test
 	public void findCustomerByIdTest_OK() {

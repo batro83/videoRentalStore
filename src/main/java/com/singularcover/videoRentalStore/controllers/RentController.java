@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.singularcover.videoRentalStore.dto.RentalDTO;
 import com.singularcover.videoRentalStore.dto.RentalReturnDTO;
 import com.singularcover.videoRentalStore.entity.Customer;
-import com.singularcover.videoRentalStore.service.CustomerService;
-import com.singularcover.videoRentalStore.service.RentService;
+import com.singularcover.videoRentalStore.service.impl.CustomerServiceImpl;
+import com.singularcover.videoRentalStore.service.impl.RentServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -26,10 +26,10 @@ public class RentController {
 	private static final Logger LOG = LoggerFactory.getLogger(RentController.class);
 	
 	@Autowired
-	private RentService rentService;
+	private RentServiceImpl rentService;
 	
 	@Autowired
-	private CustomerService customerService;
+	private CustomerServiceImpl customerService;
 	
 
 	@ApiOperation(value = "Rent films", notes = "Renting one or several films and calculating the price")

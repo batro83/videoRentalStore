@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.Rent;
 import com.singularcover.videoRentalStore.entity.TypeFilm;
-import com.singularcover.videoRentalStore.service.SurchargesService;
+import com.singularcover.videoRentalStore.service.impl.SurchargesServiceImpl;
 import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 @RunWith(SpringRunner.class)
@@ -24,7 +24,7 @@ public class SurchargesServiceTest {
 	private final int basic_price = 1;
 	
 	@Autowired
-	SurchargesService surchargesService;
+	SurchargesServiceImpl surchargesService;
 	
 	@Test
 	public void calculateSurchargesNewReleases_OK() {

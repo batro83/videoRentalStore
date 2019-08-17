@@ -14,14 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
-import com.singularcover.videoRentalStore.service.InventoryService;
+import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class InventoryServiceTest {
 	
 	@InjectMocks
-	InventoryService inventoryService;
+	InventoryServiceImpl inventoryService;
 	
 	@Mock
 	FilmRepository filmRepository;

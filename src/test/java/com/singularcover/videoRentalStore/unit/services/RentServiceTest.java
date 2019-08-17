@@ -20,10 +20,10 @@ import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.Rent;
 import com.singularcover.videoRentalStore.entity.TypeFilm;
 import com.singularcover.videoRentalStore.entity.repository.RentRepository;
-import com.singularcover.videoRentalStore.service.InventoryService;
-import com.singularcover.videoRentalStore.service.PriceRentalService;
-import com.singularcover.videoRentalStore.service.RentService;
-import com.singularcover.videoRentalStore.service.SurchargesService;
+import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
+import com.singularcover.videoRentalStore.service.impl.PriceRentalServiceImpl;
+import com.singularcover.videoRentalStore.service.impl.RentServiceImpl;
+import com.singularcover.videoRentalStore.service.impl.SurchargesServiceImpl;
 import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 @RunWith(SpringRunner.class)
@@ -34,19 +34,19 @@ public class RentServiceTest {
 	private final int basic_price = 1;
 	
 	@InjectMocks
-	RentService rentService;	
+	RentServiceImpl rentService;	
 	
 	@Mock
-	InventoryService invService;
+	InventoryServiceImpl invService;
 	
 	@Mock
 	RentRepository rentRepository;
 	
 	@Mock
-	PriceRentalService priceRentalService;
+	PriceRentalServiceImpl priceRentalService;
 	
 	@Mock
-	SurchargesService surchargesService;
+	SurchargesServiceImpl surchargesService;
 	
 	
 	@Test

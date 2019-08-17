@@ -43,12 +43,10 @@ password:
 In the browser, change the JDBC URL to: jdbc:h2:mem:testdb   
 
 ## Run  
+Open a cmd, into the root folder's project execute 'gradle bootRun'  
 
 
-## TODO
-
-
-## TABLE
+## Tables    
 
 ### FILM  
 
@@ -85,15 +83,15 @@ id: 8 New release
 id: 9 Old  
 ```
 
-In init data.sql there is the id user 2 with 2 movies pending to return. 1 new release and 1 regular. Have 4 days late.  
+In init data.sql there is the id user 2 with 2 movies pending to return. 1 new release and 1 regular. 4 days late.  
 
 
 
-## Test
-Junit tests and integration tests. 
+## Tests  
+Junit tests and integration tests with Junit4 and Mockito.   
 
 
-## Improving
+## Improving  
 For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
 
 

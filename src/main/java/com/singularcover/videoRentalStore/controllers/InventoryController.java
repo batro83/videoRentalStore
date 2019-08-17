@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.singularcover.videoRentalStore.entity.Film;
-import com.singularcover.videoRentalStore.service.InventoryService;
+import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -27,7 +27,7 @@ public class InventoryController {
 	private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
 
 	@Autowired
-	private InventoryService inventoryService;
+	private InventoryServiceImpl inventoryService;
 
 	// TODO: put paths into an other class
 

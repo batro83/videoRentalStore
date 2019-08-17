@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.entity.Film;
 import com.singularcover.videoRentalStore.entity.TypeFilm;
-import com.singularcover.videoRentalStore.service.PriceRentalService;
+import com.singularcover.videoRentalStore.service.impl.PriceRentalServiceImpl;
 import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 
@@ -22,7 +22,7 @@ public class PriceRentalServiceTest {
 	private final int basic_price = 1;
 	
 	@Autowired
-	private PriceRentalService priceRentalService;
+	private PriceRentalServiceImpl priceRentalService;
 	
 	
 	@Test
