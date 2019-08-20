@@ -99,7 +99,7 @@ gradle test
 
 ## Improving  
 For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
-Catch exeption for user doesn't exist, and any problem with the operation.
+Catch exeption for user doesn't exist, and any problem with the operation.  
 More integration testing with more cases.
 
 
