@@ -13,6 +13,12 @@ repositories {
 	mavenCentral()
 }
 
+test {
+    useJUnit()
+
+    maxHeapSize = '2G'
+}
+
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services'

@@ -42,24 +42,26 @@ user:sa
 password:  
 In the browser, change the JDBC URL to: jdbc:h2:mem:testdb   
 
-## Run  
-Open a cmd, into the root folder's project execute 'gradle bootRun'  
-
+## Getting run  
+For run the api open a cmd, go to the root folder's project and execute:  
+```
+gradle bootRun'  
+```
 
 ## Tables    
+I created an easy db to resolve the exercise, with the following tables:
 
 ### FILM  
-
-Inventory of films  
+Table with the inventory of films  
 
 ### TYPE_FILM  
 Type film : New releases, Regular films or Old Films.  
 
-### USER
-User 
+### USER  
+Table for Users available to rent.  
 
 ### RENT    
-Table with the relation between the user and the film  
+Table with the relations between the user and the film  
 
 
 ## Examples
@@ -83,16 +85,22 @@ id: 8 New release
 id: 9 Old  
 ```
 
-In init data.sql there is the id user 2 with 2 movies pending to return. 1 new release and 1 regular. 4 days late.  
-
+In init data.sql there is the id user 2 with 2 movies pending to return. 1 new release and 1 regular. 4 days late.    
+Also in the data.sql file you can add new rental operations inserting into RENT table with id user and id film.  
 
 
 ## Tests  
-Junit tests and integration tests with Junit4 and Mockito.   
+Junit tests and integration tests with Junit4 and Mockito. 
 
+Open a cmd, into the root folder's project execute:
+```
+gradle test  
+```
 
 ## Improving  
 For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
+Catch exeption for user doesn't exist, and any problem with the operation.
+More integration testing with more cases.
 
 
 
