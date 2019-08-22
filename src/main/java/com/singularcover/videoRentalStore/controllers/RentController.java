@@ -37,10 +37,13 @@ public class RentController {
 	public ResponseEntity<RentalDTO> rentFilms(
 			@PathVariable("customer") Long customer,
 			@PathVariable("films") List<Long> films,
-			@PathVariable("days") Integer days) {
+			@PathVariable("days") Integer days) throws Exception {
 		
 		LOG.debug("RentController - rentFilms");
 		Customer cust = customerService.findCustomerById(customer);		
+		if(cust==null)
+			throw new Exception("USER_NOT_EXIST");
+		
 		return ResponseEntity.ok(rentService.rentFilms(films, cust, days));
 	}
 	
@@ -48,10 +51,13 @@ public class RentController {
 	@PostMapping(path = "/{customer}/return/{films}")
 	public ResponseEntity<RentalReturnDTO> returnFilms(
 			@PathVariable("customer") Long customer,
-			@PathVariable("films") List<Long> films) {
+			@PathVariable("films") List<Long> films) throws Exception {
 		
 		LOG.debug("RentController - rentFilms");
 		Customer cust = customerService.findCustomerById(customer);		
+		if(cust==null)
+			throw new Exception("USER_NOT_EXIST");
+		
 		return ResponseEntity.ok(rentService.returnFilms(films, cust));
 	}
 

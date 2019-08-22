@@ -56,7 +56,7 @@ public class SurchargesServiceTest {
 		
 		Film dummyFilm = Film.builder()
 				.setType(typeFilm)
-				.setIdFilm(1L)
+				.setIdFilm(idFilm)
 				.build();
 				
 		Calendar rentDate = Calendar.getInstance();

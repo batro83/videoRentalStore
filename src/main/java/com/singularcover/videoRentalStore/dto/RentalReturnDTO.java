@@ -5,6 +5,16 @@ public class RentalReturnDTO {
 	
 	private Integer surcharges;
 	
+	
+
+	public RentalReturnDTO(Integer surcharges) {
+		super();
+		this.surcharges = surcharges;
+	}
+
+	public RentalReturnDTO() {
+		super();
+	}
 
 	public Integer getSurcharges() {
 		return surcharges;

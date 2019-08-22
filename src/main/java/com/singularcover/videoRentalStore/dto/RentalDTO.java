@@ -7,6 +7,15 @@ public class RentalDTO {
 	private Integer points;	
 	
 	
+	
+	public RentalDTO(Integer price, Integer points) {
+		super();
+		this.price = price;
+		this.points = points;
+	}
+	public RentalDTO() {
+		super();
+	}
 	public Integer getPrice() {
 		return price;
 	}

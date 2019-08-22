@@ -85,7 +85,7 @@ id: 8 New release
 id: 9 Old  
 ```
 
-In init data.sql there is the id user 2 with 2 movies pending to return. 1 new release and 1 regular. 4 days late.    
+In init data.sql there is the id user 1 with 2 movies pending to return. 1 new release and 1 regular. 4 days late.    
 Also in the data.sql file you can add new rental operations inserting into RENT table with id user and id film.  
 
 
@@ -98,9 +98,8 @@ gradle test
 ```
 
 ## Improving  
-For the exercise I use an in memory db, but of course we can use a mongodb or sql.  
-Catch exeption for user doesn't exist, and any problem with the operation.  
-More integration testing with more cases.
-
+For the exercise I use an in memory db, but of course we can use a mongodb or sql db.  
+More integration testing with more cases.  
+URl paths in a constants file.  
 
 
