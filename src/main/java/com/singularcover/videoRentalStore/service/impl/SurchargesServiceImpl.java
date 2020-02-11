@@ -10,21 +10,16 @@ import com.singularcover.videoRentalStore.service.SurchargesService;
 
 /**
  * Surcharges business logic service
+ * 
  * @author roger
  *
  */
 @Service
 public class SurchargesServiceImpl implements SurchargesService {
-		
 
 	public int calculateSurcharges(List<Rent> rentList) {
-		int price = 0;
-		for (Rent rent : rentList) {
-			price += calculateSurcharges(rent);
-		}
-		return price;
+		return rentList.stream().mapToInt(rent -> calculateSurcharges(rent)).sum();
 	}
-
 
 	public int calculateSurcharges(Rent rent) {
 		int surcharge = 0;
@@ -32,15 +27,11 @@ public class SurchargesServiceImpl implements SurchargesService {
 		long endTime = Calendar.getInstance().getTimeInMillis();
 		long diffTime = endTime - startTime;
 		long diffDays = diffTime / (1000 * 60 * 60 * 24);
-		
-		if(diffDays > rent.getDays()) {
+
+		if (diffDays > rent.getDays()) {
 			int days = (int) (diffDays - rent.getDays());
 			surcharge = (int) days * rent.getFilm().getType().getPrice();
 		}
-		
 		return surcharge;
 	}
-		
-		
-
 }

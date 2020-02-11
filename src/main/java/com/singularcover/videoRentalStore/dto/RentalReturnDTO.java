@@ -1,14 +1,10 @@
 package com.singularcover.videoRentalStore.dto;
 
 public class RentalReturnDTO {
-	
-	
+
 	private Integer surcharges;
-	
-	
 
 	public RentalReturnDTO(Integer surcharges) {
-		super();
 		this.surcharges = surcharges;
 	}
 

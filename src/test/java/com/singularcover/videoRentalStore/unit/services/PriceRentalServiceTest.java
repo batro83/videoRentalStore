@@ -1,6 +1,7 @@
 package com.singularcover.videoRentalStore.unit.services;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PriceRentalServiceTest {
-	
 	
 	private final int premium_price = 3;
 	private final int basic_price = 1;
@@ -39,8 +39,7 @@ public class PriceRentalServiceTest {
 				.build();
 				
 		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
-		Assert.assertEquals(30, price);
-
+		assertEquals(30, price);
 	}
 	
 	@Test
@@ -57,7 +56,7 @@ public class PriceRentalServiceTest {
 				.build();
 			
 		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
-		Assert.assertEquals(8, price);
+		assertEquals(8, price);
 
 	}
 	
@@ -76,9 +75,7 @@ public class PriceRentalServiceTest {
 				.build();
 		
 		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);		
-		Assert.assertEquals(6, price);
+		assertEquals(6, price);
 
 	}
-
-
 }

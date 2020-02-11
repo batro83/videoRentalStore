@@ -1,9 +1,10 @@
 package com.singularcover.videoRentalStore.controllers;
 
-import java.util.List;
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.util.Collection;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api")
 public class InventoryController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
+	private static final Logger LOG = getLogger(InventoryController.class);
 
 	@Autowired
 	private InventoryServiceImpl inventoryService;
@@ -33,14 +34,14 @@ public class InventoryController {
 
 	@ApiOperation(value = "Get inventory", notes = "All movies")
 	@GetMapping(path = "/inventory")
-	public ResponseEntity<List<Film>> findAllMovies() {
+	public ResponseEntity<Collection<Film>> findAllMovies() {
 		LOG.debug("StoreController - findAllMovies");
 		return ResponseEntity.ok(inventoryService.getAllMovies());
 	}
 
 	@ApiOperation(value = "Get inventory by type id", notes = "Movies by type id")
 	@GetMapping(path = "/inventory/{type}")
-	public ResponseEntity<List<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
+	public ResponseEntity<Collection<Film>> findMoviesByType(@PathVariable(value = "type", required = true) Long type) {
 		LOG.debug("StoreController - findMoviesByType");
 		return ResponseEntity.ok(inventoryService.getMoviesByType(type));
 	}
@@ -60,5 +61,4 @@ public class InventoryController {
 		inventoryService.saveOrUpdateFilm(film);
 		return ResponseEntity.ok(HttpStatus.NO_CONTENT);
 	}
-
 }

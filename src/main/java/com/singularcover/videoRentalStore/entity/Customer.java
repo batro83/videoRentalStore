@@ -5,39 +5,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CUSTOMER")
+@Table(name = "CUSTOMER")
 public class Customer {
-	
-	
+
 	@Id
-	private Long idCustomer;	
+	private Long idCustomer;
 	private String name;
 	private Integer points;
-	
-	
-		
+
 	public Customer(Long idCustomer) {
-		super();
 		this.idCustomer = idCustomer;
 	}
+
 	public Customer() {
 		super();
 	}
+
 	public Long getIdCustomer() {
 		return idCustomer;
 	}
+
 	public void setIdCustomer(Long idCustomer) {
 		this.idCustomer = idCustomer;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getPoints() {
 		return points;
 	}
+
 	public void setPoints(Integer points) {
 		this.points = points;
 	}

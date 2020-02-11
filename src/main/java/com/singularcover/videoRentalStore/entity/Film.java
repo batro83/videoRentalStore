@@ -127,7 +127,5 @@ public class Film implements Serializable{
 			this.type = type;
 			return this;
 		}
-
-    }
-
+	}
 }

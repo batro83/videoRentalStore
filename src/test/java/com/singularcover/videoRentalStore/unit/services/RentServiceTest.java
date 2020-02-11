@@ -1,15 +1,21 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -55,18 +61,18 @@ public class RentServiceTest {
 		final int daysForRent = 10;		
 		final List<Film> list = createFilmList();
 							
-		Mockito.when(invService.getMoviesByIdList(Mockito.anyList()))
+		when(invService.getMoviesByIdList(anyList()))
 			.thenReturn(list);
 		
-		Mockito.when(priceRentalService.calculateRentalPrice(Mockito.anyList(), Mockito.anyInt()))
+		when(priceRentalService.calculateRentalPrice(anyList(), anyInt()))
 			.thenReturn(2);
 		
-		Mockito.when(rentRepository.saveAll(Mockito.anyList()))
-			.thenReturn(Arrays.asList(Rent.builder().build()));
+		when(rentRepository.saveAll(anyList()))
+			.thenReturn(asList(Rent.builder().build()));
 		
-		RentalDTO dto = rentService.rentFilms(Arrays.asList(1L,2L), new Customer(), daysForRent);
-		Assert.assertNotNull(dto);
-		Assert.assertEquals(3, dto.getPoints().intValue());
+		RentalDTO dto = rentService.rentFilms(asList(1L,2L), new Customer(), daysForRent);
+		assertNotNull(dto);
+		assertEquals(3, dto.getPoints().intValue());
 	}
 	
 	
@@ -76,31 +82,31 @@ public class RentServiceTest {
 		final int daysForRent = 10;		
 		final List<Film> list = new ArrayList<>();
 							
-		Mockito.when(invService.getMoviesByIdList(Mockito.anyList()))
+		when(invService.getMoviesByIdList(anyList()))
 			.thenReturn(list);
 					
-		RentalDTO dto = rentService.rentFilms(Arrays.asList(1L,2L), new Customer(), daysForRent);
-		Assert.assertNotNull(dto);
-		Assert.assertNull(dto.getPoints());
-		Assert.assertNull(dto.getPrice());
+		RentalDTO dto = rentService.rentFilms(asList(1L,2L), new Customer(), daysForRent);
+		assertNotNull(dto);
+		assertNull(dto.getPoints());
+		assertNull(dto.getPrice());
 	}
 	
 	
 	@Test
 	public void returnFilmsTest_OK() {
 						
-		Mockito.when(rentRepository.findRentedFilms(Mockito.anyList(), Mockito.anyLong()))
-			.thenReturn(Arrays.asList(Rent.builder().setIdRent(1).build()));
+		when(rentRepository.findRentedFilms(anyList(), anyLong()))
+			.thenReturn(asList(Rent.builder().setIdRent(1).build()));
 		
-		Mockito.when(surchargesService.calculateSurcharges(Mockito.anyList()))
+		when(surchargesService.calculateSurcharges(anyList()))
 			.thenReturn(1);		
 		
-		Mockito.when(rentRepository.saveAll(Mockito.anyList()))
-			.thenReturn(Arrays.asList(Rent.builder().build()));
+		when(rentRepository.saveAll(anyList()))
+			.thenReturn(asList(Rent.builder().build()));
 		
-		RentalReturnDTO dto = rentService.returnFilms(Arrays.asList(1L,2L), new Customer(1L));
-		Assert.assertNotNull(dto);
-		Assert.assertNotNull(dto.getSurcharges());
+		RentalReturnDTO dto = rentService.returnFilms(asList(1L,2L), new Customer(1L));
+		assertNotNull(dto);
+		assertNotNull(dto.getSurcharges());
 	}
 	
 	
@@ -109,12 +115,12 @@ public class RentServiceTest {
 		
 		final List<Rent> list = new ArrayList<>();
 							
-		Mockito.when(rentRepository.findByFilmIdFilmIn(Mockito.anyList()))
+		when(rentRepository.findByFilmIdFilmIn(anyList()))
 			.thenReturn(list);
 					
-		RentalReturnDTO dto = rentService.returnFilms(Arrays.asList(1L,2L), new Customer());
-		Assert.assertNotNull(dto);
-		Assert.assertNull(dto.getSurcharges());
+		RentalReturnDTO dto = rentService.returnFilms(asList(1L,2L), new Customer());
+		assertNotNull(dto);
+		assertNull(dto.getSurcharges());
 	}
 	
 	
@@ -151,5 +157,4 @@ public class RentServiceTest {
 		
 		return list;
 	}
-
 }

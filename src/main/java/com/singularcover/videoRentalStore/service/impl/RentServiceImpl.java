@@ -1,7 +1,8 @@
 package com.singularcover.videoRentalStore.service.impl;
 
+import static java.util.stream.Collectors.toList;
+
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,28 +20,28 @@ import com.singularcover.videoRentalStore.service.RentService;
 
 /**
  * Rental business logic service
+ * 
  * @author roger
  *
  */
 @Service
 @Transactional
 public class RentServiceImpl implements RentService {
-	
+
 	@Autowired
 	private InventoryServiceImpl invService;
-	
+
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	private PriceRentalServiceImpl priceRentalService;
-	
+
 	@Autowired
 	private SurchargesServiceImpl surchargesService;
-	
+
 	@Override
 	public RentalDTO rentFilms(List<Long> idFilms, Customer customer, Integer days) {
-
 		RentalDTO dto = new RentalDTO();
 
 		// Get films
@@ -57,17 +58,16 @@ public class RentServiceImpl implements RentService {
 
 		return dto;
 	}
-	
+
 	@Override
 	public RentalReturnDTO returnFilms(List<Long> idFilms, Customer customer) {
-
 		RentalReturnDTO dto = new RentalReturnDTO();
 
 		// Get rents
 		List<Rent> rents = getRentByIdFilmList(idFilms, customer.getIdCustomer());
 
 		if (!rents.isEmpty()) {
-			
+
 			dto.setSurcharges(surchargesService.calculateSurcharges(rents));
 			// Save rent
 			saveReturnedFilmList(rents, customer);
@@ -75,37 +75,26 @@ public class RentServiceImpl implements RentService {
 
 		return dto;
 	}
-	
-	
+
 	private List<Rent> getRentByIdFilmList(List<Long> idList, Long idCustomer) {
-		List<Rent> rents = new ArrayList<>();
-		rentRepository.findRentedFilms(idList, idCustomer).forEach(rent -> rents.add(rent));
-		return rents;
-	}
-	
-	private void saveRentFilmList(List<Film> filmList, Customer customer, Integer days) {
-		List<Rent> rentList = new ArrayList<>();
-		for (Film film : filmList) {
-			Rent rent = new Rent(customer, film, new Date(Calendar.getInstance().getTimeInMillis()),
-					film.getType().getPoints(), days);
-			rentList.add(rent);			
-		}
-		rentRepository.saveAll(rentList);
-	}
-	
-	private void saveReturnedFilmList(List<Rent> rents, Customer customer) {
-		List<Rent> rentList = new ArrayList<>();
-		for (Rent rent : rents) {
-			rent.setDateReturn(new Date(Calendar.getInstance().getTimeInMillis()));
-			rentList.add(rent);			
-		}
-		rentRepository.saveAll(rentList);
-	}
-			
-	private Integer calculatePoints(List<Film> films) {		
-		return films.stream()
-				  .map(x -> x.getType().getPoints())
-				  .reduce(0, Integer::sum);		
+		return rentRepository.findRentedFilms(idList, idCustomer);
 	}
 
+	private void saveRentFilmList(List<Film> filmList, Customer customer, Integer days) {
+		List<Rent> rentList = filmList.stream().map(film -> new Rent(customer, film,
+				new Date(Calendar.getInstance().getTimeInMillis()), film.getType().getPoints(), days))
+				.collect(toList());
+		rentRepository.saveAll(rentList);
+	}
+
+	private void saveReturnedFilmList(List<Rent> rents, Customer customer) {
+		rents.stream().forEach(rent -> {
+			rent.setDateReturn(new Date(Calendar.getInstance().getTimeInMillis()));
+		});
+		rentRepository.saveAll(rents);
+	}
+
+	private Integer calculatePoints(List<Film> films) {
+		return films.stream().map(x -> x.getType().getPoints()).reduce(0, Integer::sum);
+	}
 }
