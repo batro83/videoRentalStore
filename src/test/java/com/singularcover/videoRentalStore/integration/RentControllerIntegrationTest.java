@@ -42,6 +42,7 @@ public class RentControllerIntegrationTest {
 
 		assertEquals(OK, response.getStatusCode());
 		assertEquals("{\"price\":38,\"points\":3}", response.getBody());
+
 	}
 
 	@Test
