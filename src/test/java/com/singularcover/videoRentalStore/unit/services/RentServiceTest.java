@@ -1,6 +1,7 @@
 package com.singularcover.videoRentalStore.unit.services;
 
 import static java.util.Arrays.asList;
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -71,9 +72,7 @@ public class RentServiceTest {
 	@Test
 	public void rentFilmsPointsNotExistFilmsTest_OK() {
 		final int daysForRent = 10;
-		final List<Film> list = new ArrayList<>();
-
-		when(invService.getMoviesByIdList(anyList())).thenReturn(list);
+		when(invService.getMoviesByIdList(anyList())).thenReturn(newArrayList());
 
 		RentalDTO dto = rentService.rentFilms(asList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
@@ -95,12 +94,11 @@ public class RentServiceTest {
 
 	@Test
 	public void returnNotExistFilmsTest_OK() {
-		final List<Rent> list = new ArrayList<>();
-		when(rentRepository.findByFilmIdFilmIn(anyList())).thenReturn(list);
+		when(rentRepository.findByFilmIdFilmIn(anyList())).thenReturn(newArrayList());
 
 		RentalReturnDTO dto = rentService.returnFilms(asList(1L, 2L), new Customer());
 		assertNotNull(dto);
-		assertNull(dto.getSurcharges());
+		assertEquals(0, dto.getSurcharges(), 0);
 	}
 
 	private List<Film> createFilmList() {
