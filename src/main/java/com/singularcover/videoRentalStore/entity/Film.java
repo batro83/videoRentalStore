@@ -1,6 +1,5 @@
 package com.singularcover.videoRentalStore.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -13,15 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "FILM")
-public class Film implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8846133880106206913L;
+public class Film {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFilm;
 
 	private String name;
@@ -33,12 +27,10 @@ public class Film implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "idTypeFilm")
 	private TypeFilm type;
-		
-	public Film() {
-	}
+
+	public Film() {}
 
 	private Film(Long idFilm, String name, String category, Date dateCreated, TypeFilm type) {
-		super();
 		this.idFilm = idFilm;
 		this.name = name;
 		this.category = category;
@@ -85,11 +77,11 @@ public class Film implements Serializable{
 	public void setIdFilm(Long idFilm) {
 		this.idFilm = idFilm;
 	}
-	
+
 	public static FilmBuilder builder() {
-        return new FilmBuilder();
-    }
-	
+		return new FilmBuilder();
+	}
+
 	public static class FilmBuilder {
 
 		private Long idFilm;
@@ -98,30 +90,30 @@ public class Film implements Serializable{
 		private Date dateCreated;
 		private TypeFilm type;
 
-        public Film build() {
-            return new Film(idFilm, name, category, dateCreated, type);
-        }
+		public Film build() {
+			return new Film(idFilm, name, category, dateCreated, type);
+		}
 
 		public FilmBuilder setIdFilm(Long idFilm) {
 			this.idFilm = idFilm;
 			return this;
 		}
-		
+
 		public FilmBuilder setName(String name) {
 			this.name = name;
 			return this;
 		}
-		
+
 		public FilmBuilder setCategory(String category) {
 			this.category = category;
 			return this;
 		}
-		
+
 		public FilmBuilder setDateCreated(Date dateCreated) {
 			this.dateCreated = dateCreated;
 			return this;
 		}
-		
+
 		public FilmBuilder setType(TypeFilm type) {
 			this.type = type;
 			return this;
