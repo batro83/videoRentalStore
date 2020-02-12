@@ -16,7 +16,6 @@ public class TypeFilm {
 		
 		
 	public TypeFilm() {
-		super();
 	}
 	private TypeFilm(Long idTypeFilm, String description, Integer points, Integer price) {
 		super();
@@ -84,7 +83,5 @@ public class TypeFilm {
         public TypeFilm build() {
             return new TypeFilm(idTypeFilm, description, points, price);
         }
-
     }
-
 }

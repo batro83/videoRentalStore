@@ -35,7 +35,6 @@ public class Film implements Serializable{
 	private TypeFilm type;
 		
 	public Film() {
-		super();
 	}
 
 	private Film(Long idFilm, String name, String category, Date dateCreated, TypeFilm type) {
@@ -127,7 +126,5 @@ public class Film implements Serializable{
 			this.type = type;
 			return this;
 		}
-
-    }
-
+	}
 }

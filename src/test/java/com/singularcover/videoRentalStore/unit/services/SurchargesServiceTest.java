@@ -1,9 +1,10 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Date;
 import java.util.Calendar;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,46 +20,38 @@ import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SurchargesServiceTest {
-		
+
 	private final int premium_price = 3;
 	private final int basic_price = 1;
-	
+
 	@Autowired
 	SurchargesServiceImpl surchargesService;
-	
+
 	@Test
 	public void calculateSurchargesNewReleases_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.NEW_RELEASES, premium_price);
 		int price = surchargesService.calculateSurcharges(rent);
-		Assert.assertEquals(15, price);
+		assertEquals(15, price);
 	}
 
 	@Test
 	public void calculateSurchargesRegularFilms_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.REGULAR_FILMS, basic_price);
 		int price = surchargesService.calculateSurcharges(rent);
-		Assert.assertEquals(5, price);
+		assertEquals(5, price);
 	}
 
 	@Test
 	public void calculateSurchargesOldFilms_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.OLD_FILMS, basic_price);
 		int price = surchargesService.calculateSurcharges(rent);
-		Assert.assertEquals(5, price);
+		assertEquals(5, price);
 	}
 
 	private Rent createRent(Long idFilm, int idTypeFilm, int price) {
-		
-		TypeFilm typeFilm = TypeFilm.builder().
-				setPrice(price).
-				setIdTypeFilm(new Long(idTypeFilm))
-						.build();
-		
-		Film dummyFilm = Film.builder()
-				.setType(typeFilm)
-				.setIdFilm(idFilm)
-				.build();
-				
+		TypeFilm typeFilm = TypeFilm.builder().setPrice(price).setIdTypeFilm(new Long(idTypeFilm)).build();
+		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(idFilm).build();
+
 		Calendar rentDate = Calendar.getInstance();
 		rentDate.setTime(Calendar.getInstance().getTime());
 		rentDate.add(Calendar.DAY_OF_YEAR, -10);
@@ -70,5 +63,4 @@ public class SurchargesServiceTest {
 
 		return rent;
 	}
-
 }

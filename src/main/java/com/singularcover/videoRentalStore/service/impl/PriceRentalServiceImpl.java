@@ -11,24 +11,20 @@ import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 /**
  * Price Rental business logic
+ * 
  * @author roger
  *
  */
 @Service
 public class PriceRentalServiceImpl implements PriceRentalService {
-	
+
 	@Override
 	public int calculateRentalPrice(List<Film> filmList, Integer days) {
-		int price = 0;
-		for (Film film : filmList) {
-			price += calculateRentalPrice(film, days);
-		}
-		return price;
+		return filmList.stream().mapToInt(film -> calculateRentalPrice(film, days)).sum();
 	}
-	
+
 	@Override
-	public Integer calculateRentalPrice(Film film, Integer days) {			
-		
+	public Integer calculateRentalPrice(Film film, Integer days) {
 		int price = 0;
 		switch (film.getType().getIdTypeFilm().intValue()) {
 		case TypeFilmCts.NEW_RELEASES:
@@ -40,30 +36,24 @@ public class PriceRentalServiceImpl implements PriceRentalService {
 		case TypeFilmCts.OLD_FILMS:
 			price = basicPrice(film, days, PriceCts.DAYS_OLD_FILMS);
 			break;
-			
+
 		default:
 			break;
 		}
-		
+
 		return price;
 	}
-	
+
 	private int basicPrice(Film film, Integer days, int priceDays) {
-		int price = film.getType().getPrice();				
-		if(days > priceDays) {
+		int price = film.getType().getPrice();
+		if (days > priceDays) {
 			int diffDays = days - priceDays;
 			price += diffDays * film.getType().getPrice();
-		}		
+		}
 		return price;
 	}
-	
-	
+
 	private int premiumPrice(Film film, Integer days) {
 		return film.getType().getPrice() * days;
 	}
-	
-	
-	
-	
-
 }

@@ -22,43 +22,32 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api")
 public class RentController {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(RentController.class);
-	
+
 	@Autowired
 	private RentServiceImpl rentService;
-	
+
 	@Autowired
 	private CustomerServiceImpl customerService;
-	
 
 	@ApiOperation(value = "Rent films", notes = "Renting one or several films and calculating the price")
 	@PostMapping(path = "/{customer}/rent/{films}/{days}")
-	public ResponseEntity<RentalDTO> rentFilms(
-			@PathVariable("customer") Long customer,
-			@PathVariable("films") List<Long> films,
-			@PathVariable("days") Integer days) throws Exception {
-		
+	public ResponseEntity<RentalDTO> rentFilms(@PathVariable("customer") Long customer,
+			@PathVariable("films") List<Long> films, @PathVariable("days") Integer days) throws Exception {
+
 		LOG.debug("RentController - rentFilms");
-		Customer cust = customerService.findCustomerById(customer);		
-		if(cust==null)
-			throw new Exception("USER_NOT_EXIST");
-		
+		Customer cust = customerService.findCustomerById(customer);
 		return ResponseEntity.ok(rentService.rentFilms(films, cust, days));
 	}
-	
+
 	@ApiOperation(value = "Returning films", notes = "Returning one or several films and calculating the price")
 	@PostMapping(path = "/{customer}/return/{films}")
-	public ResponseEntity<RentalReturnDTO> returnFilms(
-			@PathVariable("customer") Long customer,
+	public ResponseEntity<RentalReturnDTO> returnFilms(@PathVariable("customer") Long customer,
 			@PathVariable("films") List<Long> films) throws Exception {
-		
+
 		LOG.debug("RentController - rentFilms");
-		Customer cust = customerService.findCustomerById(customer);		
-		if(cust==null)
-			throw new Exception("USER_NOT_EXIST");
-		
+		Customer cust = customerService.findCustomerById(customer);
 		return ResponseEntity.ok(rentService.returnFilms(films, cust));
 	}
-
 }
