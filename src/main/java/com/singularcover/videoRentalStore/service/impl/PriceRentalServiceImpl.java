@@ -23,8 +23,7 @@ public class PriceRentalServiceImpl implements PriceRentalService {
 		return filmList.stream().mapToInt(film -> calculateRentalPrice(film, days)).sum();
 	}
 
-	@Override
-	public Integer calculateRentalPrice(Film film, Integer days) {
+	private Integer calculateRentalPrice(Film film, Integer days) {
 		int price = 0;
 		switch (film.getType().getIdTypeFilm().intValue()) {
 		case TypeFilmCts.NEW_RELEASES:

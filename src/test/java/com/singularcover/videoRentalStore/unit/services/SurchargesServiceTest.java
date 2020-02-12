@@ -1,5 +1,6 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
@@ -30,21 +31,21 @@ public class SurchargesServiceTest {
 	@Test
 	public void calculateSurchargesNewReleases_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.NEW_RELEASES, premium_price);
-		int price = surchargesService.calculateSurcharges(rent);
+		int price = surchargesService.calculateSurcharges(newArrayList(rent));
 		assertEquals(15, price);
 	}
 
 	@Test
 	public void calculateSurchargesRegularFilms_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.REGULAR_FILMS, basic_price);
-		int price = surchargesService.calculateSurcharges(rent);
+		int price = surchargesService.calculateSurcharges(newArrayList(rent));
 		assertEquals(5, price);
 	}
 
 	@Test
 	public void calculateSurchargesOldFilms_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.OLD_FILMS, basic_price);
-		int price = surchargesService.calculateSurcharges(rent);
+		int price = surchargesService.calculateSurcharges(newArrayList(rent));
 		assertEquals(5, price);
 	}
 

@@ -52,11 +52,8 @@ public class RentServiceImpl implements RentService {
 			// Calculate price and points
 			dto.setPrice(priceRentalService.calculateRentalPrice(films, days));
 			dto.setPoints(calculatePoints(films));
-
-			// Save rent
 			saveRentFilmList(films, customer, days);
 		}
-
 		return dto;
 	}
 

@@ -8,5 +8,4 @@ public interface SurchargesService {
 
 	public int calculateSurcharges(List<Rent> rentList);
 
-	public int calculateSurcharges(Rent rent);
 }

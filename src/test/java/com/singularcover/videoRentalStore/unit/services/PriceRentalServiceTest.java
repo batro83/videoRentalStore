@@ -1,5 +1,6 @@
 package com.singularcover.videoRentalStore.unit.services;
 
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class PriceRentalServiceTest {
 
 		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(1L).build();
 
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);
+		int price = priceRentalService.calculateRentalPrice(newArrayList(dummyFilm), daysForRent);
 		assertEquals(30, price);
 	}
 
@@ -47,7 +48,7 @@ public class PriceRentalServiceTest {
 
 		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(1L).build();
 
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);
+		int price = priceRentalService.calculateRentalPrice(newArrayList(dummyFilm), daysForRent);
 		assertEquals(8, price);
 	}
 
@@ -62,7 +63,7 @@ public class PriceRentalServiceTest {
 
 		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(1L).build();
 
-		int price = priceRentalService.calculateRentalPrice(dummyFilm, daysForRent);
+		int price = priceRentalService.calculateRentalPrice(newArrayList(dummyFilm), daysForRent);
 		assertEquals(6, price);
 	}
 }

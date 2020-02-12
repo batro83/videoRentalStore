@@ -17,11 +17,12 @@ import com.singularcover.videoRentalStore.service.SurchargesService;
 @Service
 public class SurchargesServiceImpl implements SurchargesService {
 
+	@Override
 	public int calculateSurcharges(List<Rent> rentList) {
 		return rentList.stream().mapToInt(rent -> calculateSurcharges(rent)).sum();
 	}
 
-	public int calculateSurcharges(Rent rent) {
+	private int calculateSurcharges(Rent rent) {
 		int surcharge = 0;
 		long startTime = rent.getDateRent().getTime();
 		long endTime = Calendar.getInstance().getTimeInMillis();
