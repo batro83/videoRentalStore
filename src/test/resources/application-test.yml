@@ -1,0 +1,23 @@
+server:
+  port: 8081
+  
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/videorentalstore_test
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+      

@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.dto.RentalDTO;
@@ -34,7 +33,6 @@ import com.singularcover.videoRentalStore.service.impl.SurchargesServiceImpl;
 import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class RentServiceTest {
 
 	private final int premium_price = 3;

@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.entity.Film;
@@ -23,7 +22,6 @@ import com.singularcover.videoRentalStore.entity.repository.FilmRepository;
 import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class InventoryServiceTest {
 
 	@InjectMocks

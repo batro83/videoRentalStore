@@ -21,7 +21,7 @@ import com.singularcover.videoRentalStore.service.RentService;
 
 /**
  * Rental business logic service
- * 
+ *
  * @author roger
  *
  */
@@ -72,10 +72,15 @@ public class RentServiceImpl implements RentService {
 	}
 
 	private void saveRentFilmList(List<Film> filmList, Customer customer, Integer days) {
-		List<Rent> rentList = filmList.stream()
-				.map(film -> new Rent(customer, film, new Date(Calendar.getInstance().getTimeInMillis()),
-						film.getType().getPoints(), days))
-				.collect(toList());
+		List<Rent> rentList = filmList.stream().map(film -> {
+			return Rent.builder()
+					.setCustomer(customer)
+					.setFilm(film)
+					.setPoints(film.getType().getPoints())
+					.setDays(days)
+					.setDateRent(new Date(Calendar.getInstance().getTimeInMillis()))
+					.build();
+		}).collect(toList());
 		rentRepository.saveAll(rentList);
 	}
 

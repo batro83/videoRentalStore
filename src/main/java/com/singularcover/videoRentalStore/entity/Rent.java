@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Rent {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_rent_seq")
 	private Integer idRent;
 
 	@ManyToOne
@@ -31,10 +31,10 @@ public class Rent {
 	private Integer points;
 	private Integer days;
 
-	public Rent() {
-	}
+	public Rent() {}
 
-	public Rent(Integer idRent, Customer customer, Film film, Date dateRent, Date dateReturn, Integer points, Integer days) {
+	public Rent(Integer idRent, Customer customer, Film film, Date dateRent, Date dateReturn, Integer points,
+			Integer days) {
 		this.idRent = idRent;
 		this.customer = customer;
 		this.film = film;
@@ -153,7 +153,7 @@ public class Rent {
 			this.points = points;
 			return this;
 		}
-		
+
 		public RentBuilder setDays(Integer days) {
 			this.days = days;
 			return this;

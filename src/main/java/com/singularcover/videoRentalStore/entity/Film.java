@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Film {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_film_seq")
 	private Long idFilm;
 
 	private String name;

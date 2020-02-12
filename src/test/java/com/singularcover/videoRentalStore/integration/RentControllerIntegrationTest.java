@@ -62,7 +62,7 @@ public class RentControllerIntegrationTest {
 	@Test
 	public void returnFilmsTest() {
 		final Long idCustomer = 1L;
-		final String filmsToRent = asList(4L, 3L).stream().map(Object::toString).collect(joining(","));
+		final String filmsToRent = asList(8L, 2L).stream().map(Object::toString).collect(joining(","));
 
 		final String path = "/api/{customer}/return/{films}";
 		final ResponseEntity<String> response = restTemplate.exchange(path, POST, EMPTY, String.class, idCustomer,

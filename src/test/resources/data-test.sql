@@ -1,6 +1,6 @@
 
 -- Table User 
-DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Customer cascade;
 
 CREATE TABLE Customer (
   id_Customer INT PRIMARY KEY NOT NULL,
@@ -14,7 +14,7 @@ INSERT INTO Customer (id_Customer, name, points) VALUES
 
 
 -- Table TypeFilm 
-DROP TABLE IF EXISTS Type_Film;
+DROP TABLE IF EXISTS Type_Film cascade;
 
 CREATE TABLE Type_Film (
   id_Type_Film INT PRIMARY KEY NOT NULL,
@@ -30,34 +30,39 @@ INSERT INTO Type_Film (id_Type_Film, description, points, price) VALUES
 
 
 -- Table Film 
-DROP TABLE IF EXISTS film;
+DROP TABLE IF EXISTS film cascade;
+
+DROP SEQUENCE IF EXISTS pk_film_seq;
+CREATE SEQUENCE pk_film_seq start 1;
  
 CREATE TABLE film (
-  id_Film INT AUTO_INCREMENT  PRIMARY KEY,
+  id_Film INT not NULL DEFAULT nextval('pk_film_seq') PRIMARY KEY,
   name VARCHAR(250) NOT NULL,
-  category VARCHAR(250) NOT NULL,
+  category VARCHAR(50) NOT NULL,
   date_Created DATE NOT NULL,
   id_Type_Film INT,
-  FOREIGN KEY (id_Type_Film) REFERENCES Type_Film(id_Type_Film),
+  FOREIGN KEY (id_Type_Film) REFERENCES Type_Film(id_Type_Film)
 );
  
 INSERT INTO film (name, category, date_Created, id_Type_Film) VALUES
-  ('Aliko', 'Terror', sysdate, 1),
-  ('Bill', 'Comedy', sysdate, 2),
-  ('Folrunsho', 'Terror', sysdate, 3),
-  ('FilmC', 'Comedy', sysdate, 1),
-  ('FilmD', 'Comedy', sysdate, 2),
-  ('FilmE', 'Thriller', sysdate, 3),
-  ('FilmF', 'Comedy', sysdate, 1),
-  ('FilmG', 'Terror', sysdate, 1),
-  ('FilmH', 'Thriller', sysdate, 3);  
-  
+  ('Aliko', 'Terror', now(), 1),
+  ('Bill', 'Comedy', now(), 2),
+  ('Folrunsho', 'Terror', now(), 3),
+  ('FilmC', 'Comedy', now(), 1),
+  ('FilmD', 'Comedy', now(), 2),
+  ('FilmE', 'Thriller', now(), 3),
+  ('FilmF', 'Comedy', now(), 1),
+  ('FilmG', 'Terror', now(), 1),
+  ('FilmH', 'Thriller', now(), 3);  
   
 -- Table Rent 
-DROP TABLE IF EXISTS rent;
+DROP TABLE IF EXISTS rent cascade;
+
+DROP SEQUENCE IF EXISTS pk_rent_seq;
+CREATE SEQUENCE pk_rent_seq start 1;
  
 CREATE TABLE rent (
-  id_Rent INT AUTO_INCREMENT PRIMARY KEY,
+  id_Rent INT not NULL DEFAULT nextval('pk_rent_seq') PRIMARY KEY,
   id_Customer INT NOT NULL,
   id_Film INT NOT NULL,
   days INT NOT NULL,
@@ -70,6 +75,5 @@ CREATE TABLE rent (
  
 
 INSERT INTO rent (id_Customer, id_Film, date_rent, points, days) VALUES
-  (1, 4, sysdate-4, 1, 2),
-  (1, 3, sysdate-4, 2, 2);
-commit;
+  (1, 8, now()- interval '6 days', 2, 4),
+  (1, 2, now()- interval '6 days', 1, 4);

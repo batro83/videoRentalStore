@@ -5,8 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.singularcover.videoRentalStore.entity.Film;
@@ -15,13 +14,12 @@ import com.singularcover.videoRentalStore.service.impl.PriceRentalServiceImpl;
 import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class PriceRentalServiceTest {
 
 	private final int premium_price = 3;
 	private final int basic_price = 1;
 
-	@Autowired
+	@InjectMocks
 	private PriceRentalServiceImpl priceRentalService;
 
 	@Test

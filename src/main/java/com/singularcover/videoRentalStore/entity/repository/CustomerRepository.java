@@ -7,5 +7,4 @@ import com.singularcover.videoRentalStore.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
-
 }
