@@ -54,18 +54,13 @@ public class RentControllerTest {
 		final String path = "/api/{customer}/rent/{films}/{days}";
 
 		Customer c = new Customer(1L);
-
 		when(customerService.findCustomerById(1L)).thenReturn(c);
-
-		when(rentService.rentFilms(anyList(), any(), anyInt()))
-				.thenReturn(new RentalDTO(10, 1));
+		when(rentService.rentFilms(anyList(), any(), anyInt())).thenReturn(new RentalDTO(10, 1));
 
 		RequestBuilder requestBuilder = post(path, idCustomer, filmsToRent, days).accept(APPLICATION_JSON);
-
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andReturn();
 
 		assertNotNull(result.getResponse());
-
 		RentalDTO resp = mapper.readValue(result.getResponse().getContentAsString(), RentalDTO.class);
 		assertNotNull(resp);
 		assertEquals(10, resp.getPrice().intValue());
@@ -80,15 +75,12 @@ public class RentControllerTest {
 		final String path = "/api/{customer}/return/{films}";
 
 		Customer c = new Customer(1L);
-
 		when(customerService.findCustomerById(1L)).thenReturn(c);
-
 		when(rentService.returnFilms(anyList(), any())).thenReturn(new RentalReturnDTO(15));
 
 		RequestBuilder requestBuilder = post(path, idCustomer, filmsToRent, days).accept(APPLICATION_JSON);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andReturn();
-
 		assertNotNull(result.getResponse());
 
 		RentalReturnDTO resp = mapper.readValue(result.getResponse().getContentAsString(), RentalReturnDTO.class);

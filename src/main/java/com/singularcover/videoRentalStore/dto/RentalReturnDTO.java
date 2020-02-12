@@ -19,5 +19,4 @@ public class RentalReturnDTO {
 	public void setSurcharges(Integer surcharges) {
 		this.surcharges = surcharges;
 	}
-
 }

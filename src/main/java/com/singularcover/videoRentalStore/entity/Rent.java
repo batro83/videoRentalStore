@@ -160,7 +160,5 @@ public class Rent {
 			this.days = days;
 			return this;
 		}
-
 	}
-
 }

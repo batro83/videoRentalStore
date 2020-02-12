@@ -48,7 +48,7 @@ public class RentControllerIntegrationTest {
 	public void rentFilmsTest2() {
 		final Long idCustomer = 2L;
 		final String filmsToRent = asList(1L, 2L).stream().map(Object::toString).collect(joining(","));
-		;
+
 		final Integer days = 10;
 		final String path = "/api/{customer}/rent/{films}/{days}";
 
@@ -63,9 +63,8 @@ public class RentControllerIntegrationTest {
 	public void returnFilmsTest() {
 		final Long idCustomer = 1L;
 		final String filmsToRent = asList(4L, 3L).stream().map(Object::toString).collect(joining(","));
-		;
-		final String path = "/api/{customer}/return/{films}";
 
+		final String path = "/api/{customer}/return/{films}";
 		final ResponseEntity<String> response = restTemplate.exchange(path, POST, EMPTY, String.class, idCustomer,
 				filmsToRent);
 

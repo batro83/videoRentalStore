@@ -11,7 +11,6 @@ public class RentalDTO {
 	}
 
 	public RentalDTO() {
-		super();
 	}
 
 	public Integer getPrice() {
@@ -34,5 +33,4 @@ public class RentalDTO {
 	public String toString() {
 		return "RentalDTO [price=" + price + ", points=" + points + "]";
 	}
-
 }

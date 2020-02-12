@@ -9,5 +9,4 @@ public class VideoRentalStoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VideoRentalStoreApplication.class, args);
 	}
-
 }

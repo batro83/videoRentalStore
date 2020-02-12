@@ -35,126 +35,97 @@ import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RentServiceTest {
-	
+
 	private final int premium_price = 3;
 	private final int basic_price = 1;
-	
+
 	@InjectMocks
-	RentServiceImpl rentService;	
-	
+	RentServiceImpl rentService;
+
 	@Mock
 	InventoryServiceImpl invService;
-	
+
 	@Mock
 	RentRepository rentRepository;
-	
+
 	@Mock
 	PriceRentalServiceImpl priceRentalService;
-	
+
 	@Mock
 	SurchargesServiceImpl surchargesService;
-	
-	
+
 	@Test
 	public void rentFilmsPointsTest_OK() {
-		
-		final int daysForRent = 10;		
+		final int daysForRent = 10;
 		final List<Film> list = createFilmList();
-							
-		when(invService.getMoviesByIdList(anyList()))
-			.thenReturn(list);
-		
-		when(priceRentalService.calculateRentalPrice(anyList(), anyInt()))
-			.thenReturn(2);
-		
-		when(rentRepository.saveAll(anyList()))
-			.thenReturn(asList(Rent.builder().build()));
-		
-		RentalDTO dto = rentService.rentFilms(asList(1L,2L), new Customer(), daysForRent);
+
+		when(invService.getMoviesByIdList(anyList())).thenReturn(list);
+		when(priceRentalService.calculateRentalPrice(anyList(), anyInt())).thenReturn(2);
+		when(rentRepository.saveAll(anyList())).thenReturn(asList(Rent.builder().build()));
+
+		RentalDTO dto = rentService.rentFilms(asList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
 		assertEquals(3, dto.getPoints().intValue());
 	}
-	
-	
+
 	@Test
 	public void rentFilmsPointsNotExistFilmsTest_OK() {
-		
-		final int daysForRent = 10;		
+		final int daysForRent = 10;
 		final List<Film> list = new ArrayList<>();
-							
-		when(invService.getMoviesByIdList(anyList()))
-			.thenReturn(list);
-					
-		RentalDTO dto = rentService.rentFilms(asList(1L,2L), new Customer(), daysForRent);
+
+		when(invService.getMoviesByIdList(anyList())).thenReturn(list);
+
+		RentalDTO dto = rentService.rentFilms(asList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
 		assertNull(dto.getPoints());
 		assertNull(dto.getPrice());
 	}
-	
-	
+
 	@Test
 	public void returnFilmsTest_OK() {
-						
 		when(rentRepository.findRentedFilms(anyList(), anyLong()))
-			.thenReturn(asList(Rent.builder().setIdRent(1).build()));
-		
-		when(surchargesService.calculateSurcharges(anyList()))
-			.thenReturn(1);		
-		
-		when(rentRepository.saveAll(anyList()))
-			.thenReturn(asList(Rent.builder().build()));
-		
-		RentalReturnDTO dto = rentService.returnFilms(asList(1L,2L), new Customer(1L));
+				.thenReturn(asList(Rent.builder().setIdRent(1).build()));
+		when(surchargesService.calculateSurcharges(anyList())).thenReturn(1);
+		when(rentRepository.saveAll(anyList())).thenReturn(asList(Rent.builder().build()));
+
+		RentalReturnDTO dto = rentService.returnFilms(asList(1L, 2L), new Customer(1L));
 		assertNotNull(dto);
 		assertNotNull(dto.getSurcharges());
 	}
-	
-	
+
 	@Test
 	public void returnNotExistFilmsTest_OK() {
-		
 		final List<Rent> list = new ArrayList<>();
-							
-		when(rentRepository.findByFilmIdFilmIn(anyList()))
-			.thenReturn(list);
-					
-		RentalReturnDTO dto = rentService.returnFilms(asList(1L,2L), new Customer());
+		when(rentRepository.findByFilmIdFilmIn(anyList())).thenReturn(list);
+
+		RentalReturnDTO dto = rentService.returnFilms(asList(1L, 2L), new Customer());
 		assertNotNull(dto);
 		assertNull(dto.getSurcharges());
 	}
-	
-	
-	private List<Film> createFilmList(){
+
+	private List<Film> createFilmList() {
 		List<Film> list = new ArrayList<>();
-		
-		TypeFilm typeFilm = TypeFilm.builder().
-				setPrice(premium_price).
-				setPoints(2).
-				setIdTypeFilm(new Long(TypeFilmCts.NEW_RELEASES))
-						.build();
-		
-		Film dummyFilm = Film.builder()
-				.setType(typeFilm)
-				.setIdFilm(1L)
-				.setName("Name1")
+
+		TypeFilm typeFilm = TypeFilm.builder()
+				.setPrice(premium_price)
+				.setPoints(2)
+				.setIdTypeFilm(new Long(TypeFilmCts.NEW_RELEASES))
 				.build();
-		
+
+		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(1L).setName("Name1").build();
+
 		list.add(dummyFilm);
-		
-		typeFilm = TypeFilm.builder().
-				setPrice(basic_price).
-				setPoints(1).
-				setIdTypeFilm(new Long(TypeFilmCts.REGULAR_FILMS))
-						.build();
-		
-		dummyFilm = Film.builder()
-				.setType(typeFilm)
-				.setIdFilm(2L)
-				.setName("Name2")
+
+		typeFilm = TypeFilm.builder()
+				.setPrice(basic_price)
+				.setPoints(1)
+				.setIdTypeFilm(new Long(TypeFilmCts.REGULAR_FILMS))
 				.build();
-		
+
+		dummyFilm = Film.builder().setType(typeFilm).setIdFilm(2L).setName("Name2").build();
+
 		list.add(dummyFilm);
-		
+
 		return list;
 	}
 }

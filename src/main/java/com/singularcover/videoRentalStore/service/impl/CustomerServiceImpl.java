@@ -21,6 +21,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer findCustomerById(Long id) throws Exception {
-		return customerRepository.findById(id).orElseThrow(() -> new Exception("USER_NOT_EXIST") );
+		return customerRepository.findById(id).orElseThrow(() -> new Exception("USER_NOT_EXIST"));
 	}
 }

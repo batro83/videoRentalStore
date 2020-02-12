@@ -11,5 +11,4 @@ public interface RentService {
 	public RentalDTO rentFilms(List<Long> idFilms, Customer customer, Integer days);
 
 	public RentalReturnDTO returnFilms(List<Long> idFilms, Customer customer);
-
 }

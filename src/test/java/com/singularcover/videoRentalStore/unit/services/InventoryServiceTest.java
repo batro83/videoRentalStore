@@ -25,36 +25,27 @@ import com.singularcover.videoRentalStore.service.impl.InventoryServiceImpl;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class InventoryServiceTest {
-	
+
 	@InjectMocks
 	InventoryServiceImpl inventoryService;
-	
+
 	@Mock
 	FilmRepository filmRepository;
-	
+
 	@Test
 	public void deleteFilmTest_OK() {
-		Film dummyFilm = Film.builder()
-				.setIdFilm(1L)
-				.build();
-
-		// Act
+		Film dummyFilm = Film.builder().setIdFilm(1L).build();
 		inventoryService.deleteFilm(1L);
-		// Assert
 		verify(filmRepository, times(1)).deleteById(dummyFilm.getIdFilm());
 	}
 
 	@Test
 	public void saveOrUpdateFilm_OK() {
-		Film dummyFilm = Film.builder()
-				.setIdFilm(1L)
-				.build();
-
+		Film dummyFilm = Film.builder().setIdFilm(1L).build();
 		when(filmRepository.save(any(Film.class))).thenReturn(dummyFilm);
 
 		Film film = inventoryService.saveOrUpdateFilm(dummyFilm);
 		assertEquals(film.getIdFilm(), dummyFilm.getIdFilm());
-
 	}
 
 	@Test
@@ -64,6 +55,5 @@ public class InventoryServiceTest {
 		List<Film> filmList = inventoryService.getAllMovies();
 		assertNotNull(filmList);
 		assertTrue(filmList.size() > 0);
-
 	}
 }

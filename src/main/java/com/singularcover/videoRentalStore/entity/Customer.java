@@ -18,7 +18,6 @@ public class Customer {
 	}
 
 	public Customer() {
-		super();
 	}
 
 	public Long getIdCustomer() {
@@ -44,5 +43,4 @@ public class Customer {
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.singularcover.videoRentalStore.service.impl;
 
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
 import java.sql.Date;
@@ -62,17 +63,10 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public RentalReturnDTO returnFilms(List<Long> idFilms, Customer customer) {
 		RentalReturnDTO dto = new RentalReturnDTO();
-
-		// Get rents
-		List<Rent> rents = getRentByIdFilmList(idFilms, customer.getIdCustomer());
-
-		if (!rents.isEmpty()) {
-
+		ofNullable(getRentByIdFilmList(idFilms, customer.getIdCustomer())).ifPresent(rents -> {
 			dto.setSurcharges(surchargesService.calculateSurcharges(rents));
-			// Save rent
 			saveReturnedFilmList(rents, customer);
-		}
-
+		});
 		return dto;
 	}
 
@@ -81,16 +75,15 @@ public class RentServiceImpl implements RentService {
 	}
 
 	private void saveRentFilmList(List<Film> filmList, Customer customer, Integer days) {
-		List<Rent> rentList = filmList.stream().map(film -> new Rent(customer, film,
-				new Date(Calendar.getInstance().getTimeInMillis()), film.getType().getPoints(), days))
+		List<Rent> rentList = filmList.stream()
+				.map(film -> new Rent(customer, film, new Date(Calendar.getInstance().getTimeInMillis()),
+						film.getType().getPoints(), days))
 				.collect(toList());
 		rentRepository.saveAll(rentList);
 	}
 
 	private void saveReturnedFilmList(List<Rent> rents, Customer customer) {
-		rents.stream().forEach(rent -> {
-			rent.setDateReturn(new Date(Calendar.getInstance().getTimeInMillis()));
-		});
+		rents.stream().forEach(rent -> rent.setDateReturn(new Date(Calendar.getInstance().getTimeInMillis())));
 		rentRepository.saveAll(rents);
 	}
 

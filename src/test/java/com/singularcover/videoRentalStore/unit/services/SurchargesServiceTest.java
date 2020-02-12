@@ -20,13 +20,13 @@ import com.singularcover.videoRentalStore.utils.TypeFilmCts;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SurchargesServiceTest {
-		
+
 	private final int premium_price = 3;
 	private final int basic_price = 1;
-	
+
 	@Autowired
 	SurchargesServiceImpl surchargesService;
-	
+
 	@Test
 	public void calculateSurchargesNewReleases_OK() {
 		Rent rent = createRent(1L, TypeFilmCts.NEW_RELEASES, premium_price);
@@ -49,17 +49,9 @@ public class SurchargesServiceTest {
 	}
 
 	private Rent createRent(Long idFilm, int idTypeFilm, int price) {
-		
-		TypeFilm typeFilm = TypeFilm.builder().
-				setPrice(price).
-				setIdTypeFilm(new Long(idTypeFilm))
-						.build();
-		
-		Film dummyFilm = Film.builder()
-				.setType(typeFilm)
-				.setIdFilm(idFilm)
-				.build();
-				
+		TypeFilm typeFilm = TypeFilm.builder().setPrice(price).setIdTypeFilm(new Long(idTypeFilm)).build();
+		Film dummyFilm = Film.builder().setType(typeFilm).setIdFilm(idFilm).build();
+
 		Calendar rentDate = Calendar.getInstance();
 		rentDate.setTime(Calendar.getInstance().getTime());
 		rentDate.add(Calendar.DAY_OF_YEAR, -10);
@@ -71,5 +63,4 @@ public class SurchargesServiceTest {
 
 		return rent;
 	}
-
 }
