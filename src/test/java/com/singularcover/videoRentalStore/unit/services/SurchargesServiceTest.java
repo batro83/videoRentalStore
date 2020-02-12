@@ -57,10 +57,11 @@ public class SurchargesServiceTest {
 		rentDate.setTime(Calendar.getInstance().getTime());
 		rentDate.add(Calendar.DAY_OF_YEAR, -10);
 
-		Rent rent = new Rent();
-		rent.setFilm(dummyFilm);
-		rent.setDateRent(new Date(rentDate.getTimeInMillis()));
-		rent.setDays(5);
+		Rent rent = Rent.builder()
+				.setFilm(dummyFilm)
+				.setDateRent(new Date(rentDate.getTimeInMillis()))
+				.setDays(5)
+				.build();
 
 		return rent;
 	}

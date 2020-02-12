@@ -34,8 +34,7 @@ public class Rent {
 	public Rent() {
 	}
 
-	public Rent(Integer idRent, Customer customer, Film film, Date dateRent, Integer points, Integer days) {
-		super();
+	public Rent(Integer idRent, Customer customer, Film film, Date dateRent, Date dateReturn, Integer points, Integer days) {
 		this.idRent = idRent;
 		this.customer = customer;
 		this.film = film;
@@ -45,7 +44,6 @@ public class Rent {
 	}
 
 	public Rent(Customer customer, Film film, Date dateRent, Integer points, Integer days) {
-		super();
 		this.customer = customer;
 		this.film = film;
 		this.dateRent = dateRent;
@@ -123,7 +121,7 @@ public class Rent {
 		private Integer days;
 
 		public Rent build() {
-			return new Rent(idRent, customer, film, dateRent, points, days);
+			return new Rent(idRent, customer, film, dateRent, dateReturn, points, days);
 		}
 
 		public RentBuilder setIdRent(Integer idRent) {
@@ -155,8 +153,8 @@ public class Rent {
 			this.points = points;
 			return this;
 		}
-
-		public RentBuilder setDateReturn(Integer days) {
+		
+		public RentBuilder setDays(Integer days) {
 			this.days = days;
 			return this;
 		}

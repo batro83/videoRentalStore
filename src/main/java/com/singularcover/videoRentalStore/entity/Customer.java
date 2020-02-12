@@ -20,6 +20,13 @@ public class Customer {
 	public Customer() {
 	}
 
+	public Customer(Long idCustomer, String name, Integer points) {
+		super();
+		this.idCustomer = idCustomer;
+		this.name = name;
+		this.points = points;
+	}
+
 	public Long getIdCustomer() {
 		return idCustomer;
 	}
@@ -42,5 +49,34 @@ public class Customer {
 
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+
+	public static CustomerBuilder builder() {
+		return new CustomerBuilder();
+	}
+
+	public static class CustomerBuilder {
+		private Long idCustomer;
+		private String name;
+		private Integer points;
+
+		public Customer build() {
+			return new Customer(idCustomer, name, points);
+		}
+
+		public CustomerBuilder setIdCustomer(Long idCustomer) {
+			this.idCustomer = idCustomer;
+			return this;
+		}
+
+		public CustomerBuilder setName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public CustomerBuilder setPoints(Integer points) {
+			this.points = points;
+			return this;
+		}
 	}
 }

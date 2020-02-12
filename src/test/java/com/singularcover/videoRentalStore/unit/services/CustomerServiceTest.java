@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,10 +29,8 @@ public class CustomerServiceTest {
 
 	@Test
 	public void findCustomerByIdTest_OK() throws Exception {
-		Customer dummyCustomer = new Customer();
-		dummyCustomer.setIdCustomer(1L);
-		Optional<Customer> dummyCustomerOptional = ofNullable(dummyCustomer);
-		when(customerRepository.findById(anyLong())).thenReturn(dummyCustomerOptional);
+		Customer dummyCustomer = Customer.builder().setIdCustomer(1L).build();
+		when(customerRepository.findById(anyLong())).thenReturn(ofNullable(dummyCustomer));
 
 		Customer customer = customerService.findCustomerById(1l);
 		assertNotNull(customer);
@@ -42,8 +38,7 @@ public class CustomerServiceTest {
 
 	@Test(expected = Exception.class)
 	public void findCustomerByIdTest_KO() throws Exception {
-		Optional<Customer> dummyCustomerOptional = empty();
-		when(customerRepository.findById(anyLong())).thenReturn(dummyCustomerOptional);
+		when(customerRepository.findById(anyLong())).thenReturn(empty());
 		customerService.findCustomerById(1l);
 	}
 }
