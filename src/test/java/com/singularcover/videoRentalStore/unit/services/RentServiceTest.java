@@ -3,7 +3,6 @@ package com.singularcover.videoRentalStore.unit.services;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -73,8 +72,8 @@ public class RentServiceTest {
 
 		RentalDTO dto = rentService.rentFilms(newArrayList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
-		assertNull(dto.getPoints());
-		assertNull(dto.getPrice());
+		assertEquals(0, dto.getPoints(), 0);
+		assertEquals(0, dto.getPrice(), 0);
 	}
 
 	@Test

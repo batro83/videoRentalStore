@@ -43,18 +43,13 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public RentalDTO rentFilms(List<Long> idFilms, Customer customer, Integer days) {
-		RentalDTO dto = new RentalDTO();
-
-		// Get films
-		List<Film> films = invService.getMoviesByIdList(idFilms);
-
-		if (!films.isEmpty()) {
-			// Calculate price and points
+		return ofNullable(invService.getMoviesByIdList(idFilms)).map(films -> {
+			RentalDTO dto = new RentalDTO();
 			dto.setPrice(priceRentalService.calculateRentalPrice(films, days));
 			dto.setPoints(calculatePoints(films));
 			saveRentFilmList(films, customer, days);
-		}
-		return dto;
+			return dto;
+		}).orElse(null);
 	}
 
 	@Override
