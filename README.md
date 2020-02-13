@@ -89,6 +89,14 @@ In init data.sql there is the id user 1 with 2 movies pending to return. 1 new r
 Also in the data.sql file you can add new rental operations inserting into RENT table with id user and id film.  
 
 
+## Docker  
+```
+ sudo docker build -t video-rental .  
+ sudo docker run -p 8080:8080 -d --net="host" -it video-rental
+ 
+```
+
+
 ## Tests  
 Junit tests and integration tests with Junit4 and Mockito. 
 

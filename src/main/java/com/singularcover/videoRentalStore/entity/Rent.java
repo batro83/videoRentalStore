@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "RENT")
@@ -20,15 +21,19 @@ public class Rent {
 
 	@ManyToOne
 	@JoinColumn(name = "idCustomer")
+	@NotNull
 	private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name = "idFilm")
+	@NotNull
 	private Film film;
 
+	@NotNull
 	private Date dateRent;
 	private Date dateReturn;
 	private Integer points;
+	@NotNull
 	private Integer days;
 
 	public Rent() {}

@@ -1,7 +1,6 @@
 package com.singularcover.videoRentalStore.unit.services;
 
-import static java.util.Arrays.asList;
-import static org.assertj.core.util.Lists.newArrayList;
+import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -60,9 +59,9 @@ public class RentServiceTest {
 
 		when(invService.getMoviesByIdList(anyList())).thenReturn(list);
 		when(priceRentalService.calculateRentalPrice(anyList(), anyInt())).thenReturn(2);
-		when(rentRepository.saveAll(anyList())).thenReturn(asList(Rent.builder().build()));
+		when(rentRepository.saveAll(anyList())).thenReturn(newArrayList(Rent.builder().build()));
 
-		RentalDTO dto = rentService.rentFilms(asList(1L, 2L), new Customer(), daysForRent);
+		RentalDTO dto = rentService.rentFilms(newArrayList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
 		assertEquals(3, dto.getPoints().intValue());
 	}
@@ -72,7 +71,7 @@ public class RentServiceTest {
 		final int daysForRent = 10;
 		when(invService.getMoviesByIdList(anyList())).thenReturn(newArrayList());
 
-		RentalDTO dto = rentService.rentFilms(asList(1L, 2L), new Customer(), daysForRent);
+		RentalDTO dto = rentService.rentFilms(newArrayList(1L, 2L), new Customer(), daysForRent);
 		assertNotNull(dto);
 		assertNull(dto.getPoints());
 		assertNull(dto.getPrice());
@@ -81,11 +80,11 @@ public class RentServiceTest {
 	@Test
 	public void returnFilmsTest_OK() {
 		when(rentRepository.findRentedFilms(anyList(), anyLong()))
-				.thenReturn(asList(Rent.builder().setIdRent(1).build()));
+				.thenReturn(newArrayList(Rent.builder().setIdRent(1).build()));
 		when(surchargesService.calculateSurcharges(anyList())).thenReturn(1);
-		when(rentRepository.saveAll(anyList())).thenReturn(asList(Rent.builder().build()));
+		when(rentRepository.saveAll(anyList())).thenReturn(newArrayList(Rent.builder().build()));
 
-		RentalReturnDTO dto = rentService.returnFilms(asList(1L, 2L), new Customer(1L));
+		RentalReturnDTO dto = rentService.returnFilms(newArrayList(1L, 2L), new Customer(1L));
 		assertNotNull(dto);
 		assertNotNull(dto.getSurcharges());
 	}
@@ -94,7 +93,7 @@ public class RentServiceTest {
 	public void returnNotExistFilmsTest_OK() {
 		when(rentRepository.findByFilmIdFilmIn(anyList())).thenReturn(newArrayList());
 
-		RentalReturnDTO dto = rentService.returnFilms(asList(1L, 2L), new Customer());
+		RentalReturnDTO dto = rentService.returnFilms(newArrayList(1L, 2L), new Customer());
 		assertNotNull(dto);
 		assertEquals(0, dto.getSurcharges(), 0);
 	}

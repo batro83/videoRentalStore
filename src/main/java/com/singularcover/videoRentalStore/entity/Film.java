@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "FILM")
@@ -18,14 +19,18 @@ public class Film {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_film_seq")
 	private Long idFilm;
 
+	@NotNull
 	private String name;
 
+	@NotNull
 	private String category;
 
+	@NotNull
 	private Date dateCreated;
 
 	@ManyToOne
 	@JoinColumn(name = "idTypeFilm")
+	@NotNull
 	private TypeFilm type;
 
 	public Film() {}
