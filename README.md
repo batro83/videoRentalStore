@@ -93,7 +93,6 @@ Also in the data.sql file you can add new rental operations inserting into RENT 
 ```
  sudo docker build -t video-rental .  
  sudo docker run -p 8080:8080 -d --net="host" -it video-rental
- 
 ```
 
 
