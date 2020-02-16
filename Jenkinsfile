@@ -11,6 +11,11 @@ pipeline {
         git 'https://github.com/batro83/videoRentalStore.git'
       }
     }
+    stage('Building jar') {
+      steps{
+        sh "./gradlew bootJar"
+      }
+    }
     stage('Building image') {
       steps{
         script {
