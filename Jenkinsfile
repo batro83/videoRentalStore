@@ -1,3 +1,7 @@
+tools {
+    gradle "gradle-5.6.4"
+}
+
 pipeline {
   environment {
     registry = "rogerabad/video-rental"
