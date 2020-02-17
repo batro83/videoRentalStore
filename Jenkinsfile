@@ -15,11 +15,11 @@ pipeline {
         git 'https://github.com/batro83/videoRentalStore.git'
       }
     }
-    /*stage('Building jar') {
+    stage('Building jar') {
       steps{
         sh "./gradlew build"
       }
-    }*/
+    }
     stage('Building image') {
       steps{
         script {
