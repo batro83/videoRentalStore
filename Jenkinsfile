@@ -6,7 +6,7 @@ pipeline {
     dockerImage = ''
   }
   tools {
-  	gradle "GRADLE_HOME"
+  	gradle "gradle-5.6.4"
   }
   agent any
   stages {
