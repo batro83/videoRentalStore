@@ -44,8 +44,10 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
+          	sh "docker container stop videoRentalStoreContainer"
+          	sh "docker container rm -f videoRentalStoreContainer"
             dockerImage.pull()
-            sh "docker run -p 8081:8081 -d --net='host' -it $registry"
+            sh "docker run -p 8081:8081 -d --net='host' -it --rm --name videoRentalStoreContainer $registry"
           }
         }
       }
