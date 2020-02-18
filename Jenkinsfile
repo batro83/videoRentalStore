@@ -43,8 +43,8 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            sh "docker pull $registry:$BUILD_NUMBER"
-            sh docker run -p 8081:8081 -d --net="host" -it $registry:$BUILD_NUMBER
+            dockerImage.pull()
+            sh "docker run -p 8081:8081 -d --net='host' -it $registry:$BUILD_NUMBER"
           }
         }
       }
