@@ -20,6 +20,10 @@ test {
     maxHeapSize = '2G'
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '5.6.1'
+}
+
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services'
