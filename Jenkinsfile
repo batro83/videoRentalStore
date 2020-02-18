@@ -18,8 +18,7 @@ pipeline {
     stage('Building jar') {
       steps{
       	sh "chmod +x ./gradlew"
-      	sh "./gradlew wrapper --no-daemon"
-        sh "./gradlew build"
+        sh "gradle build"
       }
     }
     stage('Building image') {
