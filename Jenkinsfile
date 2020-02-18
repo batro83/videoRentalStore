@@ -44,7 +44,6 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-          	dockerImage.stop()
             dockerImage.pull()
             sh "docker run -p 8081:8081 -d --net='host' -it $registry"
           }
