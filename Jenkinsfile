@@ -15,13 +15,13 @@ pipeline {
     stage('Building jar') {
       steps{
       	sh "chmod +x ./gradlew"
-        sh "gradle build"
+        sh "gradle clean build"
       }
     }
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry
         }
       }
     }
@@ -36,15 +36,17 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        //sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry"
       }
     }
     stage('Deploy Image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
+          	dockerImage.stop()
             dockerImage.pull()
-            sh "docker run -p 8081:8081 -d --net='host' -it $registry:$BUILD_NUMBER"
+            sh "docker run -p 8081:8081 -d --net='host' -it $registry"
           }
         }
       }
