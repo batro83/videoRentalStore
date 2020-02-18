@@ -9,6 +9,8 @@ bin/
 # Package Files #
 *.war
 *.ear
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 #Gradle temporary files
 target/
