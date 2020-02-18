@@ -2,11 +2,8 @@
 pipeline {
   environment {
     registry = "rogerabad/video-rental"
-    registryCredential = 'dockerhub'
+    registryCredential = 'batroska83'
     dockerImage = ''
-  }
-  tools {
-  	gradle "gradle-5.6.4"
   }
   agent any
   stages {
